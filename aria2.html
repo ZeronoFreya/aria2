@@ -1,0 +1,36 @@
+﻿<html window-frame="transparent">
+<head>
+<title>aria2</title>
+<style type="text/css" src="scs/css.scs"></style>
+<script type="text/tiscript" src="tis/tis.tis"></script>
+</head>
+<body>
+<widget#widget>
+<include src="titlebar.html" />
+<section#body>
+    <ul #tool-bar .flow-h>
+        <li>新建任务</li>
+        <li>开始|停止</li>
+        <li>全部删除</li>
+        <li>设置</li>
+        <li>完成关机</li>
+    </ul>
+    <ul #downloading>
+        <li>
+            <i .status></i>
+            <div .property>
+                <p>[TSDM][Centaur_no_Nayami][12][GB][720P][PC&PSV].mp4</p>
+                <ul .status>
+                    <li><span>144mb</span></li>
+                    <li><span>2mb/s</span></li>
+                    <li><span>00:00:06</span></li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</section>
+<include src="statusbar.html" />
+</widget>
+</body>
+
+</html>

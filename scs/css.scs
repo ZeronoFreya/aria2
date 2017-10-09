@@ -1,0 +1,53 @@
+@import "common.scs";
+
+#tool-bar{
+    width: *;
+    height: 60dip;
+    border-spacing: 10dip;
+}
+#tool-bar > li{
+    size: 48dip;
+    /*border: 1px red solid;*/
+    background: #c0c0c0;
+    border-radius: 5dip;
+    overflow: hidden;
+    vertical-align: middle;
+    text-align: center;
+}
+#downloading{
+    size: *;
+    border-spacing: 10dip;
+    background: #c0c0c0;
+    padding: 5dip;
+    overflow: hidden;
+}
+#downloading > li{
+    width: *;
+    flow: horizontal;
+    background: #f0f0f0;
+}
+#downloading i.status{
+    display: block;
+    size: 64dip;
+    background: #fff;
+}
+#downloading div.property{
+    width: *;
+    height: *;
+}
+#downloading div.property > p{
+    padding: 5dip;
+    width: *;
+    height: *;
+    overflow: hidden;
+}
+#downloading ul.status{
+    width: *;
+    padding: 5dip;
+    flow: horizontal;
+    horizontal-align: right;
+    border-spacing: 10dip;
+}
+#downloading ul.status span{
+    padding-left: 5dip;
+}

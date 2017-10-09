@@ -1,0 +1,10 @@
+// include "common.tis";
+include "jsonrpc.tis";
+self.ready = function() {
+    var rpc = new JsonRPC( "http://localhost:6800/jsonrpc" );
+    function show(data,status = 200)
+    {
+      stdout.println(data);
+    }
+    rpc.post("aria2.addTorrent");
+}
