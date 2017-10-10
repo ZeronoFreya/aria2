@@ -1,0 +1,53 @@
+@import "../../scs/common.scs";
+html{
+    width: 310dip;
+    height: width(61.8%);
+}
+#body{
+    position: relative;
+}
+#nt-input-group,
+#nt-cfg-group{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /*size: *;*/
+    flow:vertical;
+    padding: 5dip;
+    border-spacing: 10dip;
+    opacity: 1.0;
+}
+.translate-up{
+    opacity: 0;
+    transform: translate(0, -100%);
+    transition: opacity(linear, 200ms) transform(cubic-out, 200ms) ;
+}
+.translate-dn{
+    opacity: 0;
+    transform: translate(0, 100%);
+    transition: opacity(linear, 200ms) transform(cubic-out, 200ms) ;
+}
+#new-task-path{
+    border-radius: 5dip;
+    border: 1px @BORDERCOLOR solid;
+    overflow: auto;
+    size: *;
+    color: @FONTCOLOR-DARK;
+    font-family: exo2;
+    font-size: 12pt;
+    padding: 5dip;
+    word-wrap:break-word;
+}
+.nt-btn{
+    width: *;
+    height: 32px;
+    line-height: 32px;
+    background: transparent;
+    border: 1px @BORDERCOLOR solid;
+    border-radius: 5dip;
+    color: @FONTCOLOR-DARK;
+    font-family: exo2;
+    font-size: 12pt;
+}

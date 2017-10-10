@@ -8,7 +8,7 @@
     src: url("fonts/exo2regular.ttf");
 }
 
-html,body,header,caption, widget, section, h1, h2, h3, h4, h5, h6, hr,
+html,body,header,caption, widget, group, section, h1, h2, h3, h4, h5, h6, hr,
 p, a, blockquote, dl, dt, dd, ul,
 ol, li, pre, form, fieldset, legend,
 button, input, textarea, th, td
@@ -44,6 +44,9 @@ section#body{
     size: *;
     overflow: hidden;
     padding: 0 3dip 3dip 3dip;
+}
+group{
+    display: block;
 }
 ul,li{
     list-style-type: none;

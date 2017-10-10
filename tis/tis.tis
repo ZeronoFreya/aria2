@@ -1,10 +1,17 @@
 // include "common.tis";
+include "decorators.tis";
 include "jsonrpc.tis";
 self.ready = function() {
-    var rpc = new JsonRPC( "http://localhost:6800/jsonrpc" );
-    function show(data,status = 200)
-    {
-      stdout.println(data);
-    }
-    rpc.post("aria2.addTorrent");
+    // var rpc = new JsonRPC( "http://localhost:6800/jsonrpc" );
+    // function show(data,status = 200)
+    // {
+    //   stdout.println(data);
+    // }
+    // rpc.post("aria2.addTorrent");
+}
+@click @on "#new-task":{
+    // 新建任务
+    stdout.println("r");
+    var v = view.dialog( self.url("dialog/new-task/new-task.html"), true, -5 ); // -5 - in the middle of its parent window;
+    stdout.printf("result:%v\n",v);
 }

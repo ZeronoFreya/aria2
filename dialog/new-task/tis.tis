@@ -1,0 +1,31 @@
+﻿// include "../../tis/common.tis";
+// self.ready = function() {
+//     //设置窗口居中
+//     setWinToCenter();
+//     view.windowTopmost = true;
+//     // var h = $(header).box(#height, #border, #view);
+//     // setMinSize( 320,197.76 );
+//     // 加载或刷新deBug？
+//     $(#window-debug).on("click",function(){
+//         Sciter.launch( "inspector.exe" );
+//         view.connectToInspector($(html));
+//     });
+//     // var ul = $(#ul);
+//     // for(var i=0;i<100;i++){
+//     //     ul.$append(<li>{i}</li>);
+//     // }
+//     // ul.postEvent("is-scroll");
+// }
+view.windowTopmost = true;
+include "../../tis/decorators.tis";
+
+@click @on "#close-dialog" :: view.close( $(#new-task-path).value );
+// @click @on "#cancel-dialog" :: view.close( null );
+@click @on "#show-cfg" :{
+    $(#nt-input-group).@.addClass("translate-up");
+    $(#nt-cfg-group).@.removeClass("translate-dn");
+};
+@click @on "#show-path" :{
+    $(#nt-input-group).@.removeClass("translate-up");
+    $(#nt-cfg-group).@.addClass("translate-dn");
+};

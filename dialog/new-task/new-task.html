@@ -1,0 +1,24 @@
+﻿<html window-frame="transparent">
+<head>
+<title>new-task</title>
+<style type="text/css" src="css.scs"></style>
+<script type="text/tiscript" src="tis.tis"></script>
+</head>
+<body>
+<widget#widget>
+<include src="titlebar.html" />
+<section#body>
+    <group #nt-input-group>
+        <textarea #new-task-path novalue="拖入Torrent文件或粘贴下载地址"></textarea>
+        <button .nt-btn #show-cfg>Ok</button>
+    </group>
+    <group #nt-cfg-group .translate-dn>
+        <button .nt-btn #show-path>Back</button>
+        <button .nt-btn #close-dialog>Ok</button>
+    </group>
+</section>
+<include src="statusbar.html" />
+</widget>
+</body>
+
+</html>

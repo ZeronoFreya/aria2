@@ -8,13 +8,13 @@
 <widget#widget>
 <include src="titlebar.html" />
 <section#body>
-    <ul #tool-bar .flow-h>
-        <li>新建任务</li>
-        <li>开始|停止</li>
-        <li>全部删除</li>
-        <li>设置</li>
-        <li>完成关机</li>
-    </ul>
+    <group #tool-bar>
+        <button #new-task>新建任务</button>
+        <button >开始|停止</button>
+        <button >全部删除</button>
+        <button >设置</button>
+        <button >完成关机</button>
+    </group>
     <ul #downloading>
         <li>
             <i .status></i>
