@@ -15,3 +15,21 @@ self.ready = function() {
     var v = view.dialog( self.url("dialog/new-task/new-task.html"), true, -5 ); // -5 - in the middle of its parent window;
     stdout.printf("result:%v\n",v);
 }
+
+/*
+864KiB/244MiB(0%) CN:25 SD:2 DL:119KiB ETA:34m49s
+http://aria2.github.io/manual/en/html/aria2c.html#misc
+
+CN
+已建立的连接数
+SD
+已连接的种子数
+DL
+下载速度
+UL
+上传速度
+ETA
+预计完成下载的时间
+
+samples\material\!test.htm
+*/

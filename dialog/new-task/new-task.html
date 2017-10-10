@@ -9,12 +9,32 @@
 <include src="titlebar.html" />
 <section#body>
     <group #nt-input-group>
-        <textarea #new-task-path novalue="拖入Torrent文件或粘贴下载地址"></textarea>
+        <textarea #new-task-path novalue="HTTP(S), FTP, SFTP, BitTorrent, and Metalink."></textarea>
         <button .nt-btn #show-cfg>Ok</button>
     </group>
     <group #nt-cfg-group .translate-dn>
         <button .nt-btn #show-path>Back</button>
-        <button .nt-btn #close-dialog>Ok</button>
+        <widget#tree-list>
+            <option>
+                <text><checkbox>1080P</checkbox></text>
+                <option>
+                    <text>(COMIC1☆10) [Heaven's Gate (安藤智也)] えろちか 參 (ラブライブ!).zip</text>
+                </option>
+            </option>
+        </widget>
+        <group #nt-savepath>
+            <nav>
+                <button>默认</button>
+                <button>图片</button>
+                <button>自定义</button>
+            </nav>
+            <p><span>e:/download/Picture</span><button>编辑</button></p>
+        </group>
+        <group #nt-gj>
+            下载速度|上传速度|使用代理|地址|端口|用户名|密码
+        </group>
+        <button .nt-btn #close-dialog0>稍后下载</button>
+        <button .nt-btn #close-dialog>立即下载</button>
     </group>
 </section>
 <include src="statusbar.html" />
