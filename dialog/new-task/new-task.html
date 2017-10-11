@@ -16,19 +16,35 @@
         <button .nt-btn #show-path>Back</button>
         <widget#tree-list>
             <option>
-                <text><checkbox>1080P</checkbox></text>
+                <checkbox><text>1080P</text></checkbox>
                 <option>
-                    <text>(COMIC1☆10) [Heaven's Gate (安藤智也)] えろちか 參 (ラブライブ!).zip</text>
+                     <checkbox><text>1080(COMIC1☆10) [Heaven's Gate (安藤智也)] えろちか 參 (ラブライブ!).zip</text></checkbox>
                 </option>
             </option>
         </widget>
+        <!-- <select #dd type="tree" multiple="checkmarks" size=16 >
+            <option expanded>
+                <caption>Halogens</caption>
+                <option value="F"><code>F</code>Fluorine</option>
+                <option value="Cl"><code>Cl</code>Chlorine</option>
+            </option>
+            <option value="He"><code>He</code>Helium</option>
+        </select> -->
         <group #nt-savepath>
             <nav>
                 <button>默认</button>
                 <button>图片</button>
                 <button>自定义</button>
             </nav>
-            <p><span>e:/download/Picture</span><button>编辑</button></p>
+            <widget|path name=test >
+                <caption>
+                    <text>https://sciter.com/forums/topic/path-ellipsis/#post-51193</text>
+                    <button>编辑</button>
+                </caption>
+                <option>
+                    <textarea novalue="6">123</textarea>
+                </option>
+            </widget>
         </group>
         <group #nt-gj>
             下载速度|上传速度|使用代理|地址|端口|用户名|密码

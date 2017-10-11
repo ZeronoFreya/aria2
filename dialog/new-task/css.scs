@@ -1,7 +1,8 @@
 @import "../../scs/common.scs";
 html{
     width: 310dip;
-    height: width(61.8%);
+    /*height: width(61.8%);*/
+    height: 600dip;
 }
 #body{
     position: relative;
@@ -51,23 +52,41 @@ html{
     font-family: exo2;
     font-size: 12pt;
 }
+#tree-list{
+    padding-right: 1.6em;
+}
+#tree-list option{
+    padding-left: 1.6em;
+}
+#tree-list group{
+    flow:horizontal;
+}
 #tree-list text{
+    line-height:1.5em;
     overflow-x:hidden;
     white-space:nowrap;
     text-overflow:path-ellipsis;
 }
+
 #tree-list checkbox { style-set: m-checkbox; }
+#tree-list option > checkbox{
+    width: *;
+    padding-left: 1.8em;
+}
 
 @set m-checkbox {
   :root {
     behavior:check;
+    /*size: 1.6em;*/
+    /*width: 1.6em;*/
     display:block;
-    width:max-content;
+    /*width:max-content;*/
+    height:1.4em;
     line-height:1.4em;
     foreground-repeat: no-repeat;
     foreground-position: 0.2em 50%;
-    foreground-size: 1.2em;
-    padding: * 0.6em * 1.8em;
+    foreground-size: 1.0em;
+    /*padding: 0 0.2em;*/
     foreground-image: url(path:m 495.18709,197.52453 c -79.3334,0 -147.1667,28.16666 -203.5,84.5 -56.3334,56.33333 -84.5,124.16667 -84.5,203.5 v 831.99997 c 0,79.3334 28.1666,147.1667 84.5,203.5 56.3333,56.3334 124.1666,84.5 203.5,84.5 h 832.00001 c 79.3333,0 147.1666,-28.1666 203.5,-84.5 56.3333,-56.3333 84.5,-124.1666 84.5,-203.5 V 485.52453 c 0,-79.33333 -28.1667,-147.16667 -84.5,-203.5 -56.3334,-56.33334 -124.1667,-84.5 -203.5,-84.5 z m 0,128 h 832.00001 c 44,0 81.6666,15.66666 113,47 31.3333,31.33333 47,69 47,113 v 831.99997 c 0,44 -15.6667,81.6667 -47,113 -31.3334,31.3334 -69,47 -113,47 H 495.18709 c -44,0 -81.6667,-15.6666 -113,-47 -31.3334,-31.3333 -47,-69 -47,-113 V 485.52453 c 0,-44 15.6666,-81.66667 47,-113 31.3333,-31.33334 69,-47 113,-47 z);
     fill: #777;
     cursor:pointer;
@@ -84,15 +103,131 @@ html{
     border-spacing: 10dip;
     padding: 5dip;
 }
-#nt-savepath nav button{
+#nt-savepath button{
     width: max-content;
-    height: 32px;
-    line-height: 32px;
+    height: 1.6em;
+    line-height: 1.6em;
     background: transparent;
     border: 1px @BORDERCOLOR solid;
     border-radius: 5dip;
     color: @FONTCOLOR-DARK;
     font-family: exo2;
+    font-size: 10pt;
+    padding: 0 0.6em;
+}
+#nt-savepath p{
+    border-radius: 5dip;
+    background: #eee;
+    padding: 0 0.6em;
+    flow:horizontal;
+}
+input[type=path]{
+    width: 200dip;
+  prototype: PathInput;
+  flow:horizontal;
+  border:1dip solid threedshadow;
+  background: window;
+  height:1.6em;
+}
+input[type=path] > caption
+{
+  /*flow:text;*/
+  /*behavior:edit;*/
+  /*white-space:pre;*/
+  white-space:nowrap;
+  overflow-x:hidden;
+  text-overflow:path-ellipsis;
+  line-height:1.6em;
+  width:*;
+  padding:0 4dip;
+  color: @FONTCOLOR-DARK;
+}
+
+input[type=path] > button {
+  /*style-set:none;*/
+  behavior:clickable;
+  width:0.6em;
+  height:*;
+  background: url(stock:arrow-down) no-repeat 50% 50%;
+}
+
+input#test {
+ width:20em;
+}
+
+option > code {
+    color:red;
+  display:inline-block;
+  border:1px solid #DCB;
+  width:1.4em;
+  margin-right:2px;
+  text-align:center;
+  }
+option:current > code {
+    border-color:transparent;
+}
+
+widget[type=path]{
+    width: *;
+    height: 1.6em;
+    overflow: hidden;
+    flow:vertical;
+    position: relative;
+}
+widget[type=path] > caption{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    /*width: *;*/
+    /*height: 1.6em;*/
+    flow:horizontal;
+    border-spacing: 10dip;
+}
+widget[type=path] > caption>text{
+        width: *;
+    white-space:nowrap;
+  overflow-x:hidden;
+  text-overflow:path-ellipsis;
+  line-height:1.6em;
+}
+widget[type=path] > caption>button{
+    /*width: max-content;*/
+}
+widget[type=path] > option{
+    /*behavior:edit;*/
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    /*width: *;*/
+    /*height: 100%%;*/
+    /*height: 6.0em;*/
+    /*display: none;*/
+    border: 1px @BORDERCOLOR solid;
+    border-radius: 5dip;
     font-size: 12pt;
-    padding: 0 5dip 0 5dip;
+    overflow: hidden;
+    transform: translate(0,100%);
+}
+widget[type=path] > option > textarea{
+    /*border: transparent;*/
+    background: transparent;
+    overflow: auto;
+    /*size: *;*/
+    font-family: exo2;
+    font-size: 12pt;
+    padding: 5dip;
+    word-wrap:break-word;
+}
+.path-edit{
+    height: 6.4em !important;
+}
+.path-edit caption{
+    transform: translate(0,-100%);
+}
+.path-edit option{
+    transform: translate(0,0)!important;
 }
