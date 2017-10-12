@@ -33,6 +33,12 @@ body {
     background-repeat: expand;
     background-position: 20 20 20 20; /*top right bottom left offsets*/
 }
+textarea{
+    font-family: exo2;
+    font-size: 12pt;
+    font-rendering-mode: sub-pixel;
+    background-color:transparent;
+}
 widget#widget{
     overflow: hidden;
     size: *;

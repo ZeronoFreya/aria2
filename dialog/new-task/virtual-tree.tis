@@ -1,0 +1,51 @@
+
+class VirtualTree : Element
+{
+  // overridables:
+
+  function expandOption(opt)
+  {
+    opt.state.expanded = true;
+  }
+
+  function collapseOption(opt)
+  {
+    opt.state.collapsed = true;
+  }
+
+  event expand(evt) {
+    this.expandOption(evt.target);
+    return true;
+  }
+  event collapse(evt) {
+    this.collapseOption(evt.target);
+    return true;
+  }
+
+  event click $(i) (evt,i) {
+    // this.postEvent("item-activate",option.attributes["filename"]);
+    var opt = i.selectParent("option");
+    var nodeState = i.state.expanded;
+    if( nodeState === true )
+      opt.state.collapsed = true;
+    else
+      opt.state.expanded = true;
+    i.state.expanded = !nodeState;
+  }
+
+  event change $(checkbox) (evt,ck) {
+    stdout.println("t",ck.value);
+    var p = ck.parent;
+    if( p.@.hasClass("container")){
+      for(var el in p.next.$$(checkbox))
+        el.value = true;
+    }else if( p.@.hasClass("content") ){
+      
+    }
+    // if( ck.value === true ){
+
+    // }
+  }
+
+}
+

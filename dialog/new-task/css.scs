@@ -19,6 +19,7 @@ html{
     padding: 5dip;
     border-spacing: 10dip;
     opacity: 1.0;
+    overflow: hidden;
 }
 .translate-up{
     opacity: 0;
@@ -54,9 +55,32 @@ html{
 }
 #tree-list{
     padding-right: 1.6em;
+    prototype: RsTree;
 }
 #tree-list option{
-    padding-left: 1.6em;
+    /*padding-left: 1.6em;*/
+    overflow: hidden;
+}
+#tree-list option:expanded{
+    height:auto;
+}
+#tree-list option:collapsed{
+    height: 1.4em;
+}
+#tree-list option caption{
+    width: *;
+    flow:horizontal;
+}
+#tree-list option caption i{
+    display: block;
+    size: 1.4em;
+    /*border: 1px @BORDERCOLOR solid;*/
+    border-radius: 5dip;
+    cursor: pointer;
+    background: gold;
+}
+#tree-list option .content{
+    padding-left: 2.4em;
 }
 #tree-list group{
     flow:horizontal;
@@ -69,7 +93,7 @@ html{
 }
 
 #tree-list checkbox { style-set: m-checkbox; }
-#tree-list option > checkbox{
+#tree-list caption > checkbox{
     width: *;
     padding-left: 1.8em;
 }
@@ -95,16 +119,23 @@ html{
   :root:checked {
     foreground-image: url(path:M813 1299l614-614q19-19 19-45t-19-45l-102-102q-19-19-45-19t-45 19l-467 467-211-211q-19-19-45-19t-45 19l-102 102q-19 19-19 45t19 45l358 358q19 19 45 19t45-19zm851-883v960q0 119-84.5 203.5t-203.5 84.5h-960q-119 0-203.5-84.5t-84.5-203.5v-960q0-119 84.5-203.5t203.5-84.5h960q119 0 203.5 84.5t84.5 203.5z);
     fill: var(normal,#000);
-    transition: fill(linear, 160ms) foreground-image(linear, 160ms);
+    transition: fill(linear, 80ms) foreground-image(linear, 80ms);
   }
 }
+#nt-savepath{
+    width: *;
+    overflow: hidden;
+    flow:vertical;
+}
 #nt-savepath nav{
+    width: *;
     flow:horizontal;
     border-spacing: 10dip;
-    padding: 5dip;
+    /*padding: 5dip;*/
+    padding: 5dip 0;
 }
 #nt-savepath button{
-    width: max-content;
+    /*width: max-content;*/
     height: 1.6em;
     line-height: 1.6em;
     background: transparent;
@@ -115,119 +146,58 @@ html{
     font-size: 10pt;
     padding: 0 0.6em;
 }
-#nt-savepath p{
-    border-radius: 5dip;
-    background: #eee;
-    padding: 0 0.6em;
-    flow:horizontal;
-}
-input[type=path]{
-    width: 200dip;
-  prototype: PathInput;
-  flow:horizontal;
-  border:1dip solid threedshadow;
-  background: window;
-  height:1.6em;
-}
-input[type=path] > caption
-{
-  /*flow:text;*/
-  /*behavior:edit;*/
-  /*white-space:pre;*/
-  white-space:nowrap;
-  overflow-x:hidden;
-  text-overflow:path-ellipsis;
-  line-height:1.6em;
-  width:*;
-  padding:0 4dip;
-  color: @FONTCOLOR-DARK;
-}
-
-input[type=path] > button {
-  /*style-set:none;*/
-  behavior:clickable;
-  width:0.6em;
-  height:*;
-  background: url(stock:arrow-down) no-repeat 50% 50%;
-}
-
-input#test {
- width:20em;
-}
-
-option > code {
-    color:red;
-  display:inline-block;
-  border:1px solid #DCB;
-  width:1.4em;
-  margin-right:2px;
-  text-align:center;
-  }
-option:current > code {
-    border-color:transparent;
-}
-
-widget[type=path]{
+#nt-savepath .container{
     width: *;
-    height: 1.6em;
-    overflow: hidden;
+    border: 1px @BORDERCOLOR solid;
+    border-radius: 5dip;
+    padding: 5dip;
+    height: 1.5em;
+    min-height: 1.5em;
     flow:vertical;
-    position: relative;
 }
-widget[type=path] > caption{
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    /*width: *;*/
-    /*height: 1.6em;*/
+#nt-savepath .container.custom-mode{
+    height:auto;
+    /*transition: height(linear, 200ms);*/
+}
+#nt-savepath .container .preview-download-path{
+    height:1.5em;
+    line-height:1.5em;
+    overflow-x:hidden;
+    white-space:nowrap;
+    text-overflow:path-ellipsis;
+    cursor: text;
+    behavior:clickable;
+}
+#nt-savepath .container.custom-mode .preview-download-path{
+/*    opacity: 0;
+    transform: translate(0, -100%);
+    transition: opacity(linear, 200ms) transform(cubic-out, 200ms) ;
+    z-index: 0;*/
+    opacity: 0;
+    height: 0;
+    /*transition: opacity(linear, 200ms) height(linear, 200ms);*/
+}
+#nt-savepath .container .custom-download-path{
+    opacity:0;
+    width: *;
+    max-height: 6.4em;
+    height: max-content;
+    line-height:1.5em;
+    overflow: auto;
+    background: transparent;
+    font-size: 12pt;
+    word-wrap:break-word;
+    /*transform: translate(0, 100%);*/
+    /*transition: opacity(linear, 200ms) transform(cubic-out, 200ms) ;*/
+}
+#nt-savepath .container.custom-mode .custom-download-path{
+    opacity: 1;
+    /*transform: translate(0, 0);*/
+}
+
+
+#nt-btn{
     flow:horizontal;
     border-spacing: 10dip;
 }
-widget[type=path] > caption>text{
-        width: *;
-    white-space:nowrap;
-  overflow-x:hidden;
-  text-overflow:path-ellipsis;
-  line-height:1.6em;
-}
-widget[type=path] > caption>button{
-    /*width: max-content;*/
-}
-widget[type=path] > option{
-    /*behavior:edit;*/
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    /*width: *;*/
-    /*height: 100%%;*/
-    /*height: 6.0em;*/
-    /*display: none;*/
-    border: 1px @BORDERCOLOR solid;
-    border-radius: 5dip;
-    font-size: 12pt;
-    overflow: hidden;
-    transform: translate(0,100%);
-}
-widget[type=path] > option > textarea{
-    /*border: transparent;*/
-    background: transparent;
-    overflow: auto;
-    /*size: *;*/
-    font-family: exo2;
-    font-size: 12pt;
-    padding: 5dip;
-    word-wrap:break-word;
-}
-.path-edit{
-    height: 6.4em !important;
-}
-.path-edit caption{
-    transform: translate(0,-100%);
-}
-.path-edit option{
-    transform: translate(0,0)!important;
-}
+

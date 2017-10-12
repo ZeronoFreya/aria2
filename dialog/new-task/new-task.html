@@ -16,9 +16,29 @@
         <button .nt-btn #show-path>Back</button>
         <widget#tree-list>
             <option>
-                <checkbox><text>1080P</text></checkbox>
+                <caption.container>
+                    <i></i><checkbox><text>1080P</text></checkbox>
+                </caption>
                 <option>
-                     <checkbox><text>1080(COMIC1☆10) [Heaven's Gate (安藤智也)] えろちか 參 (ラブライブ!).zip</text></checkbox>
+                    <caption.content>
+                        <checkbox><text>1</text></checkbox>
+                    </caption>
+                    <caption.content>
+                        <checkbox><text>1</text></checkbox>
+                    </caption>
+                </option>
+            </option>
+            <option>
+                <caption.container>
+                    <i></i><checkbox><text>720P</text></checkbox>
+                </caption>
+                <option>
+                    <caption.content>
+                        <checkbox><text>1</text></checkbox>
+                    </caption>
+                    <caption.content>
+                        <checkbox><text>1</text></checkbox>
+                    </caption>
                 </option>
             </option>
         </widget>
@@ -36,21 +56,18 @@
                 <button>图片</button>
                 <button>自定义</button>
             </nav>
-            <widget|path name=test >
-                <caption>
-                    <text>https://sciter.com/forums/topic/path-ellipsis/#post-51193</text>
-                    <button>编辑</button>
-                </caption>
-                <option>
-                    <textarea novalue="6">123</textarea>
-                </option>
+            <widget .container>
+                <text #preview-download-path .preview-download-path>https://sciter.com/forums/topic/path-ellipsis/#post-51193</text>
+                <textarea #custom-download-path .custom-download-path novalue="6">https://sciter.com/forums/topic/path-ellipsis/#post-51193</textarea>
             </widget>
         </group>
-        <group #nt-gj>
+        <!-- <group #nt-gj>
             下载速度|上传速度|使用代理|地址|端口|用户名|密码
+        </group> -->
+        <group #nt-btn>
+            <button .nt-btn #close-dialog0>稍后下载</button>
+            <button .nt-btn #close-dialog>立即下载</button>
         </group>
-        <button .nt-btn #close-dialog0>稍后下载</button>
-        <button .nt-btn #close-dialog>立即下载</button>
     </group>
 </section>
 <include src="statusbar.html" />

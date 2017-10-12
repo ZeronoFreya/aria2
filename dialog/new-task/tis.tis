@@ -17,6 +17,7 @@
 //     // ul.postEvent("is-scroll");
 // }
 view.windowTopmost = true;
+include "virtual-tree.tis";
 include "../../tis/decorators.tis";
 
 @click @on "#close-dialog" :: view.close( $(#new-task-path).value );
@@ -29,12 +30,22 @@ include "../../tis/decorators.tis";
     $(#nt-input-group).@.removeClass("translate-up");
     $(#nt-cfg-group).@.addClass("translate-dn");
 };
-
+@click @on "#preview-download-path" :{
+    var _this = $(#preview-download-path);
+    _this.parent.@.addClass("custom-mode");
+    _this.next.state.focus = true;
+};
+$(#custom-download-path).on("focusout",function(){
+    $(#preview-download-path).text = this.text;
+    this.parent.@.removeClass("custom-mode");
+})
 class PathInput : Element
 {
   function attached() {  this.update(this.attributes["value"]);  }
 
-  function update(path) { this.$content(<caption>{path}</caption><button/>);}
+  function update(path) {
+    this.$content(<caption value="{path}" /><button/>);
+  }
 
   event focusout {
     // reset content to show ellipsis
@@ -52,7 +63,14 @@ class PathInput : Element
     if( fn ) this.update(fn);
   }
 }
-$(widget[type=path] > caption>button).on("click",function(){
-    stdout.println("t");
-    $(widget[type=path]).@.addClass("path-edit");
-})
+// $(widget[type=path] > caption>button).on("click",function(){
+//     stdout.println("t");
+//     $(widget[type=path]).@.addClass("path-edit");
+// })
+
+class RsTree : VirtualTree
+{
+    function attached(){
+        stdout.println("876");
+    }
+}
