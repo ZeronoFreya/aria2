@@ -194,10 +194,16 @@ html{
     opacity: 1;
     /*transform: translate(0, 0);*/
 }
-
+.preview-download-path popup[role=overflow-tooltip] {
+    background: gold;
+    border:1dip solid;
+    border-radius: 4dip;
+    padding:4dip;
+}
 
 #nt-btn{
     flow:horizontal;
     border-spacing: 10dip;
 }
+
 
