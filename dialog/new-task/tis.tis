@@ -35,6 +35,9 @@ include "../../tis/decorators.tis";
     _this.parent.@.addClass("custom-mode");
     _this.next.state.focus = true;
 };
+@click @on "option" :{
+    stdout.println("dd");
+};
 $(#custom-download-path).on("focusout",function(){
     $(#preview-download-path).text = this.text;
     this.parent.@.removeClass("custom-mode");
@@ -71,6 +74,6 @@ class PathInput : Element
 class RsTree : VirtualTree
 {
     function attached(){
-        stdout.println("876");
+        // stdout.println("876");
     }
 }

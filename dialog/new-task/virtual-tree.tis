@@ -32,19 +32,42 @@ class VirtualTree : Element
       opt.state.expanded = true;
     i.state.expanded = !nodeState;
   }
-
+  function aa(ck, content){
+    stdout.println("y");
+    if ( !content) return;
+    var c = content.prior.$(checkbox);
+    c.value = ck.value;
+    if (content.$(checkbox:not(:checked))) {
+      // 有没选的，显示实心方块
+      c.state.collapsed = true;
+    }else{
+      // 显示对号
+      c.state.expanded = true;
+    }
+    // return aa(ck, content.selectParent(".content") );
+  }
   event change $(checkbox) (evt,ck) {
-    stdout.println("t",ck.value);
+    // stdout.println("t",ck.value);
     var p = ck.parent;
     if( p.@.hasClass("container")){
+      ck.state.expanded = true;
       for(var el in p.next.$$(checkbox))
-        el.value = true;
-    }else if( p.@.hasClass("content") ){
-      
+          el.value = ck.value;
+    }else{
+      var c = p.parent.prior.$(checkbox);
+      c.value = true;
+      if (ck.value === true) {
+        stdout.println("u");
+        aa(ck, p.parent);
+      }else{
+        if (p.parent.$(checkbox:checked)) {
+          c.state.collapsed = true;
+        }else{
+          c.value = ck.value;
+          c.state.expanded = true;
+        }
+      }
     }
-    // if( ck.value === true ){
-
-    // }
   }
 
 }

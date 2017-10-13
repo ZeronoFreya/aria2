@@ -54,24 +54,32 @@ html{
     font-size: 12pt;
 }
 #tree-list{
+    font-size: 12pt;
     padding-right: 1.6em;
     prototype: RsTree;
-}
-#tree-list option{
     /*padding-left: 1.6em;*/
-    overflow: hidden;
 }
+
+#tree-list option{
+    width: *;
+    overflow: hidden;
+    flow:vertical;
+    height: 1.4em;
+}
+
 #tree-list option:expanded{
     height:auto;
+    /*height:max-content;;*/
 }
 #tree-list option:collapsed{
     height: 1.4em;
+    /*height:auto;*/
 }
-#tree-list option caption{
+#tree-list caption{
     width: *;
     flow:horizontal;
 }
-#tree-list option caption i{
+#tree-list .container i{
     display: block;
     size: 1.4em;
     /*border: 1px @BORDERCOLOR solid;*/
@@ -79,12 +87,13 @@ html{
     cursor: pointer;
     background: gold;
 }
-#tree-list option .content{
+#tree-list .content > caption{
     padding-left: 2.4em;
 }
-#tree-list group{
-    flow:horizontal;
+#tree-list .content > option{
+    padding-left: 1.0em;
 }
+
 #tree-list text{
     line-height:1.5em;
     overflow-x:hidden;
@@ -111,15 +120,21 @@ html{
     foreground-position: 0.2em 50%;
     foreground-size: 1.0em;
     /*padding: 0 0.2em;*/
-    foreground-image: url(path:m 495.18709,197.52453 c -79.3334,0 -147.1667,28.16666 -203.5,84.5 -56.3334,56.33333 -84.5,124.16667 -84.5,203.5 v 831.99997 c 0,79.3334 28.1666,147.1667 84.5,203.5 56.3333,56.3334 124.1666,84.5 203.5,84.5 h 832.00001 c 79.3333,0 147.1666,-28.1666 203.5,-84.5 56.3333,-56.3333 84.5,-124.1666 84.5,-203.5 V 485.52453 c 0,-79.33333 -28.1667,-147.16667 -84.5,-203.5 -56.3334,-56.33334 -124.1667,-84.5 -203.5,-84.5 z m 0,128 h 832.00001 c 44,0 81.6666,15.66666 113,47 31.3333,31.33333 47,69 47,113 v 831.99997 c 0,44 -15.6667,81.6667 -47,113 -31.3334,31.3334 -69,47 -113,47 H 495.18709 c -44,0 -81.6667,-15.6666 -113,-47 -31.3334,-31.3333 -47,-69 -47,-113 V 485.52453 c 0,-44 15.6666,-81.66667 47,-113 31.3333,-31.33334 69,-47 113,-47 z);
+    foreground-image: url(../../img/check_0.svg);
     fill: #777;
     cursor:pointer;
+    transition: fill(linear, 80ms) foreground-image(linear, 80ms);
   }
 
   :root:checked {
-    foreground-image: url(path:M813 1299l614-614q19-19 19-45t-19-45l-102-102q-19-19-45-19t-45 19l-467 467-211-211q-19-19-45-19t-45 19l-102 102q-19 19-19 45t19 45l358 358q19 19 45 19t45-19zm851-883v960q0 119-84.5 203.5t-203.5 84.5h-960q-119 0-203.5-84.5t-84.5-203.5v-960q0-119 84.5-203.5t203.5-84.5h960q119 0 203.5 84.5t84.5 203.5z);
-    fill: var(normal,#000);
-    transition: fill(linear, 80ms) foreground-image(linear, 80ms);
+    foreground-image: url(../../img/check_1.svg);
+    /*fill: var(normal,#000);*/
+    /*transition: fill(linear, 80ms) foreground-image(linear, 80ms);*/
+  }
+  :root:checked:collapsed {
+    foreground-image: url(../../img/check_2.svg);
+    /*fill: var(normal,#000);*/
+    /*transition: fill(linear, 80ms) foreground-image(linear, 80ms);*/
   }
 }
 #nt-savepath{
