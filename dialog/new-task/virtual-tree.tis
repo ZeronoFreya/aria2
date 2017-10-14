@@ -32,41 +32,33 @@ class VirtualTree : Element
       opt.state.expanded = true;
     i.state.expanded = !nodeState;
   }
-  function aa(ck, content){
-    stdout.println("y");
+
+  function setContainerState(ckv, content){
     if ( !content) return;
+    // stdout.println("setContainerState");
+    var flag = ckv ? content.$(checkbox.ck:not(:checked)) : content.$(checkbox.ck:checked);
     var c = content.prior.$(checkbox);
-    c.value = ck.value;
-    if (content.$(checkbox:not(:checked))) {
-      // 有没选的，显示实心方块
+    if (flag) {
+      // 显示实心方块
+      c.value = true;
       c.state.collapsed = true;
     }else{
       // 显示对号
+      c.value = ckv;
       c.state.expanded = true;
     }
-    // return aa(ck, content.selectParent(".content") );
+    return setContainerState(ckv, content.parent.selectParent(".content") );
   }
+
   event change $(checkbox) (evt,ck) {
-    // stdout.println("t",ck.value);
     var p = ck.parent;
     if( p.@.hasClass("container")){
       ck.state.expanded = true;
       for(var el in p.next.$$(checkbox))
           el.value = ck.value;
+      setContainerState(ck.value, p.selectParent(".content"));
     }else{
-      var c = p.parent.prior.$(checkbox);
-      c.value = true;
-      if (ck.value === true) {
-        stdout.println("u");
-        aa(ck, p.parent);
-      }else{
-        if (p.parent.$(checkbox:checked)) {
-          c.state.collapsed = true;
-        }else{
-          c.value = ck.value;
-          c.state.expanded = true;
-        }
-      }
+      setContainerState(ck.value, p.parent);
     }
   }
 

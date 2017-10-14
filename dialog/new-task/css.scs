@@ -55,7 +55,6 @@ html{
 }
 #tree-list{
     font-size: 12pt;
-    padding-right: 1.6em;
     prototype: RsTree;
     /*padding-left: 1.6em;*/
 }
@@ -78,14 +77,26 @@ html{
 #tree-list caption{
     width: *;
     flow:horizontal;
+    padding-right: 0.6em;
+}
+#tree-list caption:hover{
+    background-color: #ccc;
 }
 #tree-list .container i{
     display: block;
     size: 1.4em;
     /*border: 1px @BORDERCOLOR solid;*/
-    border-radius: 5dip;
+    /*border-radius: 5dip;*/
     cursor: pointer;
-    background: gold;
+    /*background: gold;*/
+    foreground-repeat: no-repeat;
+    foreground-position: 0.2em 50%;
+    foreground-size: 1.0em;
+    foreground-image: url(../../img/check_0.svg);
+    fill: #777;
+}
+#tree-list .container i:expanded{
+    foreground-image: url(../../img/check_1.svg);
 }
 #tree-list .content > caption{
     padding-left: 2.4em;
