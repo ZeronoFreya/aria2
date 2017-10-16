@@ -1,5 +1,5 @@
 ﻿// include "../../tis/common.tis";
-// self.ready = function() {
+self.ready = function() {
 //     //设置窗口居中
 //     setWinToCenter();
 //     view.windowTopmost = true;
@@ -15,7 +15,19 @@
 //     //     ul.$append(<li>{i}</li>);
 //     // }
 //     // ul.postEvent("is-scroll");
-// }
+    $(#custom-download-path).on("focusout",function(){
+        $(#preview-download-path).text = this.text;
+        this.parent.@.removeClass("custom-mode");
+    })
+    // var padding_b = $(section#body).style["padding-bottom"].toFloat(#px);
+    // var padding_t = $(#nt-input-group).style["padding-top"].toFloat(#px);
+    // var padding_b = $(#nt-input-group).style["padding-bottom"].toFloat(#px);
+    // $(#nt-input-group).onSize = function(){
+    //     var h = this.box(#height, #border, #self);
+    //     this.parent.style#height = px(h + padding_b);
+    //     // stdout.println("r",h);
+    // }
+}
 view.windowTopmost = true;
 include "virtual-tree.tis";
 include "../../tis/decorators.tis";
@@ -25,10 +37,24 @@ include "../../tis/decorators.tis";
 @click @on "#show-cfg" :{
     $(#nt-input-group).@.addClass("translate-up");
     $(#nt-cfg-group).@.removeClass("translate-dn");
+    var (xs,ys,ws,hs) = view.screenBox(#workarea,#rectw);
+    var (wx,wy,ww,wh) = view.box(#rectw, #border, #screen);
+    var new_h = 600;
+    var min_y = 0;
+    var max_y = hs - new_h;
+    wy = wy - (new_h - wh)/2;
+    wy = wy < min_y ? min_y : wy;
+    wy = wy > max_y ? max_y : wy;
+    view.move(wx, wy, ww, new_h);
 };
 @click @on "#show-path" :{
     $(#nt-input-group).@.removeClass("translate-up");
     $(#nt-cfg-group).@.addClass("translate-dn");
+    var (xs,ys,ws,hs) = view.screenBox(#workarea,#rectw);
+    var (wx,wy,ww,wh) = view.box(#rectw, #border, #screen);
+    var new_h = ww * 0.618;
+    wy = wy + (new_h - wh)/2;
+    view.move(wx, wy, ww, new_h);
 };
 @click @on "#preview-download-path" :{
     var _this = $(#preview-download-path);
@@ -38,10 +64,8 @@ include "../../tis/decorators.tis";
 @click @on "option" :{
     stdout.println("dd");
 };
-$(#custom-download-path).on("focusout",function(){
-    $(#preview-download-path).text = this.text;
-    this.parent.@.removeClass("custom-mode");
-})
+
+
 class PathInput : Element
 {
   function attached() {  this.update(this.attributes["value"]);  }

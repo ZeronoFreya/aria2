@@ -1,8 +1,8 @@
 @import "../../scs/common.scs";
 html{
     width: 310dip;
-    /*height: width(61.8%);*/
-    height: 600dip;
+    height: width(61.8%);
+    /*height: 600dip;*/
 }
 #body{
     position: relative;
@@ -38,7 +38,7 @@ html{
     size: *;
     color: @FONTCOLOR-DARK;
     font-family: exo2;
-    font-size: 12pt;
+    font-size: 1em;
     padding: 5dip;
     word-wrap:break-word;
 }
