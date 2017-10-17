@@ -6,9 +6,10 @@ html{
 }
 #body{
     position: relative;
+    size: *;
 }
-#nt-input-group,
-#nt-cfg-group{
+.nt-input-group,
+.nt-cfg-group{
     position: absolute;
     top: 0;
     left: 0;
@@ -53,10 +54,33 @@ html{
     font-family: exo2;
     font-size: 12pt;
 }
-#tree-list{
+.tree-list{
+    size: *;
+}
+.tree-list nav{
+    width: *;
+    flow:horizontal;
+    border-spacing: 10dip;
+    /*padding: 5dip;*/
+    padding: 5dip 0;
+}
+.tree-list button{
+    /*width: max-content;*/
+    height: 1.6em;
+    line-height: 1.6em;
+    background: transparent;
+    border: 1px @BORDERCOLOR solid;
+    border-radius: 5dip;
+    color: @FONTCOLOR-DARK;
+    font-family: exo2;
+    font-size: 10pt;
+    padding: 0 0.6em;
+}
+#tree-list {
     font-size: 12pt;
     prototype: RsTree;
     /*padding-left: 1.6em;*/
+    size: *;
 }
 
 #tree-list option{
@@ -66,6 +90,9 @@ html{
     height: 1.4em;
 }
 
+#tree-list > option:expanded{
+    overflow-y: auto;
+}
 #tree-list option:expanded{
     height:auto;
     /*height:max-content;;*/

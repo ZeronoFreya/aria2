@@ -19,6 +19,7 @@ self.ready = function() {
         $(#preview-download-path).text = this.text;
         this.parent.@.removeClass("custom-mode");
     })
+    // $(#body).style#height = $(#nt-input-group).box(#height, #border, #self);
     // var padding_b = $(section#body).style["padding-bottom"].toFloat(#px);
     // var padding_t = $(#nt-input-group).style["padding-top"].toFloat(#px);
     // var padding_b = $(#nt-input-group).style["padding-bottom"].toFloat(#px);
@@ -39,22 +40,24 @@ include "../../tis/decorators.tis";
     $(#nt-cfg-group).@.removeClass("translate-dn");
     var (xs,ys,ws,hs) = view.screenBox(#workarea,#rectw);
     var (wx,wy,ww,wh) = view.box(#rectw, #border, #screen);
-    var new_h = 600;
+    var new_h = (ww * 1.618).toInteger();
     var min_y = 0;
     var max_y = hs - new_h;
     wy = wy - (new_h - wh)/2;
     wy = wy < min_y ? min_y : wy;
     wy = wy > max_y ? max_y : wy;
     view.move(wx, wy, ww, new_h);
+    // $(#body).style#height = $(#nt-cfg-group).box(#height, #border, #self);
 };
 @click @on "#show-path" :{
     $(#nt-input-group).@.removeClass("translate-up");
     $(#nt-cfg-group).@.addClass("translate-dn");
     var (xs,ys,ws,hs) = view.screenBox(#workarea,#rectw);
     var (wx,wy,ww,wh) = view.box(#rectw, #border, #screen);
-    var new_h = ww * 0.618;
-    wy = wy + (new_h - wh)/2;
+    var new_h = (ww * 0.618).toInteger();
+    wy = wy + (wh - new_h)/2;
     view.move(wx, wy, ww, new_h);
+    // $(#body).style#height = $(#nt-input-group).box(#height, #border, #self);
 };
 @click @on "#preview-download-path" :{
     var _this = $(#preview-download-path);

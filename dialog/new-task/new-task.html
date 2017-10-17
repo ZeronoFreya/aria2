@@ -8,53 +8,59 @@
 <widget#widget>
 <include src="titlebar.html" />
 <section#body>
-    <group #nt-input-group>
+    <section #nt-input-group .nt-input-group>
         <textarea #new-task-path novalue="HTTP(S), FTP, SFTP, BitTorrent, and Metalink."></textarea>
         <button .nt-btn #show-cfg>Ok</button>
-    </group>
-    <group #nt-cfg-group .translate-dn>
+    </section>
+    <section #nt-cfg-group .nt-cfg-group .translate-dn>
         <button .nt-btn #show-path>Back</button>
-        <widget#tree-list>
-            <option>
-                <caption.container>
-                    <i></i><checkbox><text>1080P</text></checkbox>
-                </caption>
-                <section.content.t1>
-                    <caption>
-                        <checkbox.ck><text>1</text></checkbox>
+        <group .tree-list>
+            <nav>
+                <button>Expand All</button>
+                <button>MP4</button>
+            </nav>
+            <widget#tree-list>
+                <option>
+                    <caption.container>
+                        <i></i><checkbox><text>1080P</text></checkbox>
                     </caption>
-                    <caption>
-                        <checkbox.ck><text>2</text></checkbox>
-                    </caption>
-                    <option>
-                        <caption.container>
-                            <i></i><checkbox><text>720P</text></checkbox>
+                    <section.content.t1>
+                        <caption>
+                            <checkbox.ck><text>1</text></checkbox>
                         </caption>
-                        <section.content.t2>
-                            <caption>
-                                <checkbox.ck><text>3</text></checkbox>
+                        <caption>
+                            <checkbox.ck><text>2</text></checkbox>
+                        </caption>
+                        <option>
+                            <caption.container>
+                                <i></i><checkbox><text>720P</text></checkbox>
                             </caption>
-                            <caption>
-                                <checkbox.ck><text>4</text></checkbox>
-                            </caption>
-                            <option>
-                                <caption.container>
-                                    <i></i><checkbox><text>480P</text></checkbox>
+                            <section.content.t2>
+                                <caption>
+                                    <checkbox.ck><text>3</text></checkbox>
                                 </caption>
-                                <section.content.t3>
-                                    <caption>
-                                        <checkbox.ck><text>5</text></checkbox>
+                                <caption>
+                                    <checkbox.ck><text>4</text></checkbox>
+                                </caption>
+                                <option>
+                                    <caption.container>
+                                        <i></i><checkbox><text>480P</text></checkbox>
                                     </caption>
-                                    <caption>
-                                        <checkbox.ck><text>6</text></checkbox>
-                                    </caption>
-                                </section>
-                            </option>
-                        </section>
-                    </option>
-                </section>
-            </option>
-        </widget>
+                                    <section.content.t3>
+                                        <caption>
+                                            <checkbox.ck><text>5</text></checkbox>
+                                        </caption>
+                                        <caption>
+                                            <checkbox.ck><text>6</text></checkbox>
+                                        </caption>
+                                    </section>
+                                </option>
+                            </section>
+                        </option>
+                    </section>
+                </option>
+            </widget>
+        </group>
         <group #nt-savepath>
             <nav>
                 <button>默认</button>
@@ -70,7 +76,7 @@
             <button .nt-btn #close-dialog0>稍后下载</button>
             <button .nt-btn #close-dialog>立即下载</button>
         </group>
-    </group>
+    </section>
 </section>
 <include src="statusbar.html" />
 </widget>
