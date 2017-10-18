@@ -62,14 +62,23 @@
             </widget>
         </group>
         <group #nt-savepath>
-            <nav>
-                <button>默认</button>
-                <button>图片</button>
+            <!-- <nav>
+                <button data-path="e:/download/">默认</button>
+                <button data-path="e:/download/pic/">图片</button>
                 <button>自定义</button>
-            </nav>
+            </nav> -->
             <widget .container>
-                <text #preview-download-path .preview-download-path>https://sciter.com/forums/topic/path-ellipsis/#post-51193</text>
-                <textarea #custom-download-path .custom-download-path novalue="6">https://sciter.com/forums/topic/path-ellipsis/#post-51193</textarea>
+                <group>
+                    <nav#select-save-path>
+                        <i></i>
+                        <popup>
+                            <li data-path="e:/download/">默认</li>
+                            <li data-path="e:/download/pic/">图片</li>
+                        </popup>
+                    </nav>
+                    <text #preview-download-path .preview-download-path>https://sciter.com/forums/topic/path-ellipsis/#post-51193</text>
+                </group>
+                <textarea #custom-download-path .custom-download-path></textarea>
             </widget>
         </group>
         <group #nt-btn>

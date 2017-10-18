@@ -8,6 +8,7 @@ self.ready = function() {
     //   stdout.println(data);
     // }
     // rpc.post("aria2.addTorrent");
+    // System.exec("d:\\SoftWare\\WebSW\\aria2\\aria2c.exe", "--enable-rpc", "--rpc-listen-port=6808");
 }
 @click @on "#new-task":{
     // 新建任务

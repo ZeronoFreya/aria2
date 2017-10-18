@@ -28,6 +28,22 @@ self.ready = function() {
     //     this.parent.style#height = px(h + padding_b);
     //     // stdout.println("r",h);
     // }
+
+
+    // $(nav#select-save-path popup).on()
+    // $(nav#select-save-path) << event mousedown
+    //   {
+    //     if(!this.state.ownspopup) {
+    //       var anchorPoint = 1;
+    //       var popupPoint = 1;
+    //       this.popup( this.$(popup), (popupPoint << 16) | anchorPoint);
+    //     }
+    //   }
+
+    //   // close popup on mouseup inside it
+    //   event ~mouseup $(popup) {
+    //     this.state.popup = false;
+    //   }
 }
 view.windowTopmost = true;
 include "virtual-tree.tis";
@@ -60,44 +76,95 @@ include "../../tis/decorators.tis";
     // $(#body).style#height = $(#nt-input-group).box(#height, #border, #self);
 };
 @click @on "#preview-download-path" :{
-    var _this = $(#preview-download-path);
-    _this.parent.@.addClass("custom-mode");
-    _this.next.state.focus = true;
+    // var _this = $(#preview-download-path);
+    $(#nt-savepath .container).@.addClass("custom-mode");
+    $(#custom-download-path).state.focus = true;
+    $(#custom-download-path).text = $(#preview-download-path).text;
+};
+@click @on "#testnav" :{
+    stdout.println("dd");
 };
 @click @on "option" :{
     stdout.println("dd");
 };
 
+function PopupTrigger() {
+  var popup;
+  var anchorPoint = 1;
+  var popupPoint = 1;
+  // if( var popupSelector = this.attributes["popup"] )
+  //   popup = self.select(popupSelector);
+  // if( !popup )
+    popup = this.select("popup");
 
-class PathInput : Element
-{
-  function attached() {  this.update(this.attributes["value"]);  }
+  assert popup : "PopupTrigger: popup not found";
 
-  function update(path) {
-    this.$content(<caption value="{path}" /><button/>);
+  var popupShown = false;
+  var me = this;
+  var target, path;
+  this << event click (evt) {
+    target = evt.target;
+    if( !target.belongsTo(this,false,true) )
+      return false;
+    if(popupShown){
+        if (path = target.@#data-path) {
+            $(#preview-download-path).text = path;
+            // view.msgbox( #information, target.style#background-image.substr(7));
+            this.$(i).style#background-image = "url("+target.style#background-image.substr(7)+")";
+        }
+      popup.state.popup = false;
+    }
+    else
+      this.popup(popup, (popupPoint << 16) | anchorPoint );
   }
 
-  event focusout {
-    // reset content to show ellipsis
-    this.update(this.value);
-  }
+  popup << event popupready { popupShown = true; }
+        << event popupdismissed { me.timer(500ms, ::popupShown = false); };
 
-  property value(v) {
-    get return this.$(caption).text;
-    set this.update(v);
-  }
-
-  event click $(button)
-  {
-    var fn = view.selectFile(#open, "HTML Files (*.htm,*.html)|*.HTM;*.HTML|All Files (*.*)|*.*" , "html" );
-    if( fn ) this.update(fn);
-  }
 }
+// class PathInput : Element
+// {
+//   function attached() {  this.update(this.attributes["value"]);  }
+
+//   function update(path) {
+//     this.$content(<caption value="{path}" /><button/>);
+//   }
+
+//   event focusout {
+//     // reset content to show ellipsis
+//     this.update(this.value);
+//   }
+
+//   property value(v) {
+//     get return this.$(caption).text;
+//     set this.update(v);
+//   }
+
+//   event click $(button)
+//   {
+//     var fn = view.selectFile(#open, "HTML Files (*.htm,*.html)|*.HTM;*.HTML|All Files (*.*)|*.*" , "html" );
+//     if( fn ) this.update(fn);
+//   }
+// }
 // $(widget[type=path] > caption>button).on("click",function(){
 //     stdout.println("t");
 //     $(widget[type=path]).@.addClass("path-edit");
 // })
-
+// class PathInput : Element{
+//     var popupShown = false;
+//     function attached() {
+//       this.pop = this.select("popup");
+//       this.anchorPoint = 1;
+//       this.popupPoint = 1;
+//     }
+//     event click $(nav) {
+//         // view.msgbox( #information, this.tag);
+//         this.$(nav).popup(this.pop, (this.popupPoint << 16) | this.anchorPoint );
+//     }
+//     event click $(li) {
+//         view.msgbox( #information, this.tag);
+//     }
+// }
 class RsTree : VirtualTree
 {
     function attached(){

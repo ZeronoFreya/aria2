@@ -60,7 +60,9 @@ ul,li{
 li{
     white-space: nowrap;
 }
-
+button{
+    cursor: pointer;
+}
 .otl{
     outline: 1px blue solid;
 }

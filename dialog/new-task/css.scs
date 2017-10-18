@@ -81,6 +81,9 @@ html{
     prototype: RsTree;
     /*padding-left: 1.6em;*/
     size: *;
+    min-height: 6em;
+    overflow-y: scroll-indicator;
+    overflow-x: hidden;
 }
 
 #tree-list option{
@@ -180,12 +183,34 @@ html{
     overflow: hidden;
     flow:vertical;
 }
-#nt-savepath nav{
-    width: *;
+/*#nt-savepath .container{
+    prototype: PathInput;
+}*/
+#nt-savepath .container > group{
     flow:horizontal;
+    height:1.5em;
+    border-spacing: 10dip;
+}
+#nt-savepath nav{
+    size: 1.5em;
+    /*flow:horizontal;
     border-spacing: 10dip;
     /*padding: 5dip;*/
-    padding: 5dip 0;
+    /*padding: 5dip 0;*/
+    overflow: hidden;
+    foreground-repeat: no-repeat;
+    foreground-position: top right;
+    foreground-size: 0.3em;
+    foreground-image: url(../../img/more_arrow.svg);
+    fill:#000;
+    aspect: PopupTrigger;
+    /*behavior:clickable;*/
+}
+#nt-savepath nav i{
+    display: block;
+    size: *;
+    background:url(../../img/check_0.svg) no-repeat center center;
+    background-size: cover;
 }
 #nt-savepath button{
     /*width: max-content;*/
@@ -213,6 +238,7 @@ html{
     /*transition: height(linear, 200ms);*/
 }
 #nt-savepath .container .preview-download-path{
+    width: *;
     height:1.5em;
     line-height:1.5em;
     overflow-x:hidden;
@@ -221,7 +247,7 @@ html{
     cursor: text;
     behavior:clickable;
 }
-#nt-savepath .container.custom-mode .preview-download-path{
+#nt-savepath .container.custom-mode > group{
 /*    opacity: 0;
     transform: translate(0, -100%);
     transition: opacity(linear, 200ms) transform(cubic-out, 200ms) ;
@@ -259,4 +285,39 @@ html{
     border-spacing: 10dip;
 }
 
-
+#nt-savepath nav popup
+{
+  background-color: #fff;
+  border: 1px @BORDERCOLOR solid;
+  border-radius: 5dip;
+  width:100dip;
+  height:auto;
+  flow:vertical;
+  border-spacing: 5dip;
+  padding: 5dip;
+}
+#nt-savepath nav popup li{
+    height: 1.6em;
+    line-height: 1.6em;
+    width: *;
+    /*border: 1px @BORDERCOLOR solid;*/
+    /*border-radius: 5dip;*/
+    color: @FONTCOLOR-DARK;
+    font-family: exo2;
+    font-size: 10pt;
+    padding: 0 0.6em;
+    /*background-color: transparent;*/
+    background-repeat: no-repeat;
+    background-position: center left;
+    background-size: contain;
+    background-image:url(../../img/check_0.svg);
+    text-indent: 1.8em;
+    /*padding-left: 2em;*/
+    cursor: pointer;
+}
+#nt-savepath nav popup li:last-child{
+background-image:url(../../img/check_1.svg);
+}
+#nt-savepath nav popup li:hover{
+    background-color:#ccc;
+}
