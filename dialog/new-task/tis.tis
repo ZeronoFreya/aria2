@@ -1,5 +1,8 @@
 ﻿// include "../../tis/common.tis";
 self.ready = function() {
+    $(#window-caption).text = "粘贴地址或拖入Bt文件";
+    $(#new-task-path).state.focus = false;
+
 //     //设置窗口居中
 //     setWinToCenter();
 //     view.windowTopmost = true;

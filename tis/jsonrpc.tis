@@ -7,9 +7,14 @@ class JsonRPC // JSON RPC class using POST (application/json) requests
   {
     this.indicator = indicatorElement;
     this.url = url;
+    this.aria2rpc = {
+      "jsonrpc": "2.0",
+      "id": "xxoo",
+    }
   }
 
   //remote async call
+  /*
   function post( methodName, argv.. )
   {
     // var envelope =
@@ -28,11 +33,49 @@ class JsonRPC // JSON RPC class using POST (application/json) requests
         torrent,         // torrent
         [],              // uris
         {                // options
+            "pause":"true",
             "dir":"e:\\test"
         }
       ]
     }
     return this.indicator.request(#post-json, this.url , aria2rpc); // returns promise
+  }
+*/
+  function post( methodName, argv.. ){
+    var aria2rpc = {}.extend(this.aria2rpc, {
+      "method": "aria2." + methodName.toString(),
+      "params": argv
+    });
+    return this.indicator.request(#post-json, this.url , aria2rpc);
+  }
+  function showFiles( torrentPath, fn ){
+
+    var _this = this;
+    var torrent = Bytes.load( torrentPath ).toString();
+    _this.post(
+        "addTorrent",
+        torrent,
+        [],
+        {
+            "pause":"true",
+            "dir":"e:\\test"
+        }
+    ).then(:data: _this.post(
+        "getFiles",
+        data.result
+    )).then(fn,fn);
+  }
+  function getFiles(gid){
+    var aria2rpc = {
+        "jsonrpc": "2.0",
+        "id": "xxoo",
+        "method": "aria2.getFiles",
+        "params": [
+          "token:1234",    // secret
+          gid     // gid
+        ]
+      }
+      return this.indicator.request(#post-json, this.url , aria2rpc);
   }
 
   //remote sync call

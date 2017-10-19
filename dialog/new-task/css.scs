@@ -316,7 +316,7 @@ html{
     cursor: pointer;
 }
 #nt-savepath nav popup li:last-child{
-background-image:url(../../img/check_1.svg);
+background-image:url(../../img/picture.svg);
 }
 #nt-savepath nav popup li:hover{
     background-color:#ccc;
