@@ -1,8 +1,9 @@
 // include "common.tis";
 include "decorators.tis";
 include "jsonrpc.tis";
+var rpc;
 self.ready = function() {
-    // var rpc = new JsonRPC( "http://localhost:6800/jsonrpc" );
+    rpc = new JsonRPC( "http://localhost:6800/jsonrpc" );
     // function show(data,status = 200)
     // {
     //     if( data instanceof Error )
@@ -14,9 +15,16 @@ self.ready = function() {
     //     else
     //       stdout.println("4",JSON.stringify(data,"  "));
     // }
+    function show(data,status = 200)
+    {
+        if( data instanceof Error )
+            stdout.println("Err");
+        else
+          stdout.println("4",JSON.stringify(data,"  "));
+    }
     // stdout.println(rpc.post("aria2.addTorrent"));
     // rpc.post("aria2.addTorrent").then(show,show);
-    /*
+    
     rpc.post(
         "addTorrent",
         Bytes.load( "d:\\c.torrent" ).toString(),
@@ -30,16 +38,30 @@ self.ready = function() {
         data.result
     ))
     .then(show,show);
-    */
+    
     // rpc.showFiles("d:\\c.torrent", show);
     // stdout.println("4",JSON.stringify(rpc.showFiles("d:\\c.torrent"),"  "));
-    // System.exec("d:\\SoftWare\\WebSW\\aria2\\aria2c.exe", "--enable-rpc", "--rpc-listen-port=6808");
+    // System.exec("d:\\SoftWare\\WebSW\\aria2\\aria2c.exe", "--enable-rpc", "--rpc-listen-port=6800");
 
 }
 @click @on "#new-task":{
     // 新建任务
+    function show(data,status = 200)
+    {
+        if( data instanceof Error )
+            stdout.println("Err");
+        else
+          stdout.println("4",JSON.stringify(data,"  "));
+    }
+    rpc.showFiles("d:\\c.torrent", show);
+    return;
     stdout.println("r");
-    var v = view.dialog( self.url("dialog/new-task/new-task.html"), true, -5 ); // -5 - in the middle of its parent window;
+    var v = view.dialog{
+        url     : self.url("dialog/new-task/new-task.html"),
+        client  : true,
+        parameters  : rpc,
+        alignment: -5
+    }; // -5 - in the middle of its parent window;
     stdout.printf("result:%v\n",v);
 }
 
