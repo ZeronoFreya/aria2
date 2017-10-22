@@ -24,10 +24,10 @@ self.ready = function() {
     }
     // stdout.println(rpc.post("aria2.addTorrent"));
     // rpc.post("aria2.addTorrent").then(show,show);
-    
+    /*
     rpc.post(
         "addTorrent",
-        Bytes.load( "d:\\c.torrent" ).toString(),
+        Bytes.load( "d:\\Project\\GitHub\\aria2\\d.torrent" ).toString(),
         [],
         {
             "pause":"true",
@@ -38,8 +38,11 @@ self.ready = function() {
         data.result
     ))
     .then(show,show);
-    
+    */
     // rpc.showFiles("d:\\c.torrent", show);
+    // rpc.showFiles("d:\\Project\\GitHub\\aria2\\d.torrent", show);
+    rpc.showSomething("d:\\Project\\GitHub\\aria2\\d.torrent");
+
     // stdout.println("4",JSON.stringify(rpc.showFiles("d:\\c.torrent"),"  "));
     // System.exec("d:\\SoftWare\\WebSW\\aria2\\aria2c.exe", "--enable-rpc", "--rpc-listen-port=6800");
 
