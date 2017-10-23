@@ -14,59 +14,40 @@ class JsonRPC // JSON RPC class using POST (application/json) requests
     }
   }
 
-  function aaa( methodName, argv.. ){
-    return {}.extend(this.aria2rpc, {
+  function post( methodName, argv.. ){
+    var aria2rpc = {}.extend(this.aria2rpc, {
       "method": "aria2." + methodName.toString(),
       "params": argv
     });
+    return this.indicator.request(#post-json, this.url , aria2rpc);
+  }
+  function addTorrent( torrentPath, pause=true){
+    var torrent = Bytes.load( torrentPath ).toString();
+    return this.post(
+          "addTorrent", "token:"+this.token, torrent, [],
+          {
+              "pause": pause ? "true" : "false",
+              "dir":"e:\\test"
+          }
+      );
+  }
+  function getFiles( gid ){
+    return this.post(
+        "getFiles",
+        "token:"+this.token,
+        gid
+    );
   }
   async function showSomething(torrentPath)
   {
     try {
-      var torrent = Bytes.load( torrentPath ).toString();
-      var aria2rpc = this.aaa(
-        "addTorrent",
-        "token:"+this.token,
-        torrent,
-        [],
-        {
-            "pause":"true",
-            "dir":"e:\\test"
-        }
-      );
-      var rs = await this.indicator.request(#post-json, this.url , aria2rpc);
+      var rs = await this.addTorrent(torrentPath);
       var gid = rs.result;
-      aria2rpc = this.aaa(
-        "getFiles",
-        "token:"+this.token,
-        gid
-      )
-      rs = await this.indicator.request(#post-json, this.url , aria2rpc);
+      rs = await this.getFiles(gid);
       stdout.println(gid,JSON.stringify(rs.result,"  "));
-      // $(#test).text = id + data.result;
-
     } catch (err) {
-      stdout.println("err",err);
+      stdout.println("err",err,JSON.stringify(err,"  "));
     }
   }
-  /*
-  function showFiles( torrentPath, fn ){
-
-    var _this = this;
-    var torrent = Bytes.load( torrentPath ).toString();
-    _this.post(
-        "addTorrent",
-        torrent,
-        [],
-        {
-            "pause":"true",
-            "dir":"e:\\test"
-        }
-    ).then(:data: _this.post(
-        "getFiles",
-        data.result
-    )).then(fn,fn);
-  }
-*/
 
 }
