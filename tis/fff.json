@@ -1,0 +1,69 @@
+[{
+    "completedLength": "0",
+    "index": "1",
+    "length": "1",
+    "path": "e:/test/a/b/c/d.txt",
+    "selected": "true",
+    "uris": []
+}, {
+    "completedLength": "0",
+    "index": "2",
+    "length": "32767",
+    "path": "e:/test/a/_____padding_file_0_如果您看到此文件，请升级到BitComet(比特彗星)0.85或以上版本____",
+    "selected": "true",
+    "uris": []
+}, {
+    "completedLength": "0",
+    "index": "3",
+    "length": "1",
+    "path": "e:/test/a/b/c.txt",
+    "selected": "true",
+    "uris": []
+}, {
+    "completedLength": "0",
+    "index": "4",
+    "length": "32767",
+    "path": "e:/test/a/_____padding_file_1_如果您看到此文件，请升级到BitComet(比特彗星)0.85或以上版本____",
+    "selected": "true",
+    "uris": []
+}, {
+    "completedLength": "0",
+    "index": "5",
+    "length": "1",
+    "path": "e:/test/a/b.txt",
+    "selected": "true",
+    "uris": []
+}]
+[{
+    "name": "a",
+    "file": [{
+        "name": "a.txt",
+        "index": "3",
+        "length": "32767",
+        "selected": "true"
+    }],
+    "folder": {
+        "name": "b",
+        "file": [{
+            "name": "b.txt",
+            "index": "3",
+            "selected": "true"
+        }],
+        "folder": {
+            "name": "c",
+            "file": [{
+                "name": "c.txt",
+                "index": "3",
+                "selected": "true"
+            }],
+            "folder": {
+                "name": "d",
+                "file": [{
+                    "name": "d.txt",
+                    "index": "3",
+                    "selected": "true"
+                }]
+            }
+        }
+    }
+}]
