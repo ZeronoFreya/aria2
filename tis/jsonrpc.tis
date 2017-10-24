@@ -23,13 +23,7 @@ class JsonRPC // JSON RPC class using POST (application/json) requests
   }
   function addTorrent( torrentPath, pause=true){
     var torrent = Bytes.load( torrentPath ).toString();
-    return this.post(
-          "addTorrent", "token:"+this.token, torrent, [],
-          {
-              "pause": pause ? "true" : "false",
-              "dir":"e:\\test"
-          }
-      );
+    this.__addTorrent( torrent, pause );
   }
   function getFiles( gid ){
     return this.post(
@@ -38,13 +32,30 @@ class JsonRPC // JSON RPC class using POST (application/json) requests
         gid
     );
   }
-  async function showSomething(torrentPath)
+  function aaa(gid, list){
+    // stdout.println("ffff", $(#nt-cfg-group));
+    // stdout.println(gid,JSON.stringify(list,"  "));
+    var data = [];
+    var path;
+    for (var v in list) {
+      // stdout.println("v",v.path);
+      path = v.path.substr(8);
+    }
+  }
+  async function __addTorrent(torrent, pause)
   {
     try {
-      var rs = await this.addTorrent(torrentPath);
+      var rs = await this.post(
+          "addTorrent", "token:"+this.token, torrent, [],
+          {
+              "pause": pause ? "true" : "false",
+              "dir":"e:\\test"
+          }
+      );
       var gid = rs.result;
       rs = await this.getFiles(gid);
-      stdout.println(gid,JSON.stringify(rs.result,"  "));
+      // stdout.println(gid,JSON.stringify(rs.result,"  "));
+      this.aaa(gid, rs.result);
     } catch (err) {
       stdout.println("err",err,JSON.stringify(err,"  "));
     }

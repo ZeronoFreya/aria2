@@ -59,7 +59,7 @@ import urllib.request
 # c = urllib2.urlopen('http://localhost:6800/jsonrpc', jsonreq)
 # pprint(json.loads(c.read()))
 
-with open('d:/e.torrent', 'rb') as f:
+with open('e:/test/a.torrent', 'rb') as f:
     torrent = base64.b64encode(f.read()).decode('ascii')
     aria2rpc = {
       'jsonrpc': '2.0',
@@ -97,5 +97,5 @@ with open('d:/e.torrent', 'rb') as f:
     #   'selected': 'true',
     #   'uris': []
     # }]
-    print(json.loads(c.read()))
+    print(rs)
 

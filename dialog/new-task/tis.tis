@@ -51,42 +51,13 @@ self.ready = function() {
 view.windowTopmost = true;
 include "virtual-tree.tis";
 include "../../tis/decorators.tis";
-// include "../../tis/jsonrpc.tis";
-var rpc = view.parameters;
-function showFileList(path){
-    // 判断文件是否存在
-    // ...
-    // var rpc = new JsonRPC( "http://localhost:6800/jsonrpc" );
-    function show(data,status = 200)
-    {
-        if( data instanceof Error )
-            stdout.println("Err");
-        else
-          stdout.println("4",JSON.stringify(data,"  "));
-    }
-    rpc.post(
-        "addTorrent",
-        Bytes.load( path ).toString(),
-        [],
-        {
-            "pause":"true",
-            "dir":"e:\\test"
-        }
-    ).then(function(data,status){
-        rpc.post(
-            "getFiles",
-            data.result
-        ).then(function(data,status){
-
-        })
-    })
-    return false;
-}
+include "../../tis/jsonrpc.tis";
+// var rpc = view.parameters;
+var rpc = new JsonRPC( "http://localhost:6800/jsonrpc" );;
 @click @on "#close-dialog" :: view.close( $(#new-task-path).value );
 // @click @on "#cancel-dialog" :: view.close( null );
 @click @on "#show-cfg" :{
-    if( !showFileList("d:\\c.torrent") ) return;
-
+    rpc.addTorrent($(#new-task-path).text.trim());
     $(#nt-input-group).@.addClass("translate-up");
     $(#nt-cfg-group).@.removeClass("translate-dn");
     var (xs,ys,ws,hs) = view.screenBox(#workarea,#rectw);
@@ -205,4 +176,43 @@ class RsTree : VirtualTree
     function attached(){
         // stdout.println("876");
     }
+}
+class FileDropZone : Element
+{
+  event dragenter (evt)
+  {
+    if(evt.draggingDataType == #file)
+    {
+      this.attributes.addClass("active-target");
+      return true;
+    }
+  }
+
+  event dragleave (evt)
+  {
+    this.attributes.removeClass("active-target");
+    return true;
+  }
+
+  event drag (evt)
+  {
+    if(evt.draggingDataType == #file)
+    {
+      stdout.println(evt.x,evt.y);
+      return true;
+    }
+  }
+
+  event drop (evt)
+  {
+    if(evt.draggingDataType == #file)
+    {
+      this.attributes.removeClass("active-target");
+      var fn = evt.dragging.substr(7);
+      this.text = fn;
+      // view.msgbox(#information, String.printf("Dropped:%V",fn));
+      return true;
+    }
+  }
+
 }

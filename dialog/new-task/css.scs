@@ -42,6 +42,10 @@ html{
     font-size: 1em;
     padding: 5dip;
     word-wrap:break-word;
+    prototype: FileDropZone;
+}
+#new-task-path.active-target {
+    background:gold;
 }
 .nt-btn{
     width: *;
