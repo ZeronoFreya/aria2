@@ -1,0 +1,103 @@
+﻿<html window-frame="transparent">
+<head>
+<title>aria2</title>
+<script type="text/tiscript">
+    var a = [{
+        "completedLength": "0",
+        "index": "1",
+        "length": "1",
+        "path": "e:/test/a/b/c/d.txt",
+        "selected": "true",
+        "uris": []
+    }, {
+        "completedLength": "0",
+        "index": "2",
+        "length": "32767",
+        "path": "e:/test/e/f.txt",
+        "selected": "true",
+        "uris": []
+    }, {
+        "completedLength": "0",
+        "index": "3",
+        "length": "1",
+        "path": "e:/test/a/b/c.txt",
+        "selected": "true",
+        "uris": []
+    }, {
+        "completedLength": "0",
+        "index": "4",
+        "length": "1",
+        "path": "e:/test/g.txt",
+        "selected": "true",
+        "uris": []
+    }]
+
+function creatDataJson(root, rs){
+    var data = {"_f":{}};
+    var _data = data;
+    var pathSplit = [];
+    var lastOfPathSplit = "";
+    for(var v in rs){
+        pathSplit = v.path.replace(root,"").split("/");
+        lastOfPathSplit = pathSplit.pop();
+        for( var i in pathSplit )
+            _data = _data[i] ? _data[i] : _data[i] = {"_f":{}};
+        _data["_f"][lastOfPathSplit] = { "index": v.index, "length": v.length, "selected": v.selected };
+        _data = data;
+    }
+    return data;
+}
+/*
+<option>
+    <caption.container>480P</caption>
+    <section.content>
+        <option>
+        ...
+        </option>
+        <caption>5</caption>
+        <caption>6</caption>
+        ...
+    </section>
+</option>
+*/
+var data = creatDataJson("e:/test/", a);
+// stdout.println(JSON.stringify(data,"  "));
+var html = "";
+function t( data ){
+    var _f = {};
+    if( data.exists("_f") ){
+        _f = data["_f"].clone();
+        data.remove("_f");
+    }
+    // stdout.println(JSON.stringify(_f,"  "));
+    var kSort = [];
+    for(var k in data){
+        // if(k == "_f"){
+        //     for( var k1 in data[k] ){
+        //         stdout.println("file", k1, data[k][k1].index);
+        //     }
+        // }else{
+        //     stdout.println("folder", k);
+        //     t(data[k]);
+        // }
+        kSort.push( k );
+    }
+    kSort = kSort.sort();
+    for( var k in kSort ){
+        html += "<option><caption.container><i></i><checkbox><text>" + k + "</text></checkbox></caption><section.content>";
+        t(data[k]);
+        html += "</section></option>";
+    }
+    for( var k in _f){
+        html += "<caption><checkbox.ck><text>" + k + "</text></checkbox></caption>";
+    }
+}
+t(data);
+stdout.println(html);
+</script>
+</head>
+<body>
+
+</body>
+
+</html>

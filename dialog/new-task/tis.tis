@@ -198,7 +198,7 @@ class FileDropZone : Element
   {
     if(evt.draggingDataType == #file)
     {
-      stdout.println(evt.x,evt.y);
+      // stdout.println(evt.x,evt.y);
       return true;
     }
   }
