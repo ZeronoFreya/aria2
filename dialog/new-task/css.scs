@@ -94,7 +94,7 @@ html{
     width: *;
     overflow: hidden;
     flow:vertical;
-    height: 1.4em;
+    height: 1.8em;
 }
 
 #tree-list > option:expanded{
@@ -102,14 +102,13 @@ html{
 }
 #tree-list option:expanded{
     height:auto;
-    /*height:max-content;;*/
 }
 #tree-list option:collapsed{
-    height: 1.4em;
-    /*height:auto;*/
+    height: 1.8em;
 }
 #tree-list caption{
     width: *;
+    height: 1.8em;
     flow:horizontal;
     padding-right: 0.6em;
 }
@@ -118,11 +117,9 @@ html{
 }
 #tree-list .container i{
     display: block;
-    size: 1.4em;
-    /*border: 1px @BORDERCOLOR solid;*/
-    /*border-radius: 5dip;*/
+    height: 1.8em;
+    width: 1.4em;
     cursor: pointer;
-    /*background: gold;*/
     foreground-repeat: no-repeat;
     foreground-position: 0.2em 50%;
     foreground-size: 1.0em;
@@ -140,7 +137,7 @@ html{
 }
 
 #tree-list text{
-    line-height:1.5em;
+    line-height:1.9em;
     overflow-x:hidden;
     white-space:nowrap;
     text-overflow:path-ellipsis;
@@ -155,16 +152,11 @@ html{
 @set m-checkbox {
   :root {
     behavior:check;
-    /*size: 1.6em;*/
-    /*width: 1.6em;*/
     display:block;
-    /*width:max-content;*/
-    height:1.4em;
-    line-height:1.4em;
+    height:1.9em;
     foreground-repeat: no-repeat;
     foreground-position: 0.2em 50%;
     foreground-size: 1.0em;
-    /*padding: 0 0.2em;*/
     foreground-image: url(../../img/check_0.svg);
     fill: #777;
     cursor:pointer;
