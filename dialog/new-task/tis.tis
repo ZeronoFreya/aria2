@@ -57,7 +57,6 @@ var rpc = new JsonRPC( "http://localhost:6800/jsonrpc" );;
 @click @on "#close-dialog" :: view.close( $(#new-task-path).value );
 // @click @on "#cancel-dialog" :: view.close( null );
 @click @on "#show-cfg" :{
-    rpc.addTorrent($(#new-task-path).text.trim());
     $(#nt-input-group).@.addClass("translate-up");
     $(#nt-cfg-group).@.removeClass("translate-dn");
     var (xs,ys,ws,hs) = view.screenBox(#workarea,#rectw);
@@ -70,6 +69,9 @@ var rpc = new JsonRPC( "http://localhost:6800/jsonrpc" );;
     wy = wy > max_y ? max_y : wy;
     view.move(wx, wy, ww, new_h);
     // $(#body).style#height = $(#nt-cfg-group).box(#height, #border, #self);
+
+    // rpc.addTorrent($(#new-task-path).text.trim());
+    addTorrent( $(#new-task-path).text.trim() );
 };
 @click @on "#show-path" :{
     $(#nt-input-group).@.removeClass("translate-up");
@@ -94,6 +96,69 @@ var rpc = new JsonRPC( "http://localhost:6800/jsonrpc" );;
     stdout.println("dd");
 };
 
+var html = "";
+function sortJsonKey( data ){
+  var a = [];
+  for(var k in data)
+      a.push( k );
+  return a.sort();
+}
+function creatTree( data ){
+    var _f = {};
+    if( data.exists("_f") ){
+        _f = data["_f"].clone();
+        data.remove("_f");
+    }
+    var kSort = this.sortJsonKey( data );
+    for( var k in kSort ){
+        html += "<option><caption.container><i></i><checkbox><text>" + k + "</text></checkbox></caption><section.content>";
+        this.creatTree(data[k]);
+        html += "</section></option>";
+    }
+    kSort = this.sortJsonKey( _f );
+    for( var k in kSort){
+        html += "<caption><checkbox.ck><text>" + k + "</text></checkbox></caption>";
+    }
+}
+function creatDataJson(root, rs){
+    var data = {"_f":{}};
+    var _data = data;
+    var pathSplit = [];
+    var lastOfPathSplit = "";
+    for(var v in rs){
+        pathSplit = v.path.replace(root,"").split("/");
+        lastOfPathSplit = pathSplit.pop();
+        for( var i in pathSplit )
+            _data = _data[i] ? _data[i] : _data[i] = {"_f":{}};
+        _data["_f"][lastOfPathSplit] = { "index": v.index, "length": v.length, "selected": v.selected };
+        _data = data;
+    }
+    return data;
+}
+function aaa(gid, list){
+  var data = this.creatDataJson("e:/test/", list);
+  stdout.println(gid,JSON.stringify(data,"  "));
+  this.creatTree( data );
+  $(widget#tree-list).clear().append(html);
+}
+async function addTorrent(torrentPath, pause=true){
+  try {
+    var torrent = Bytes.load( torrentPath ).toString();
+    var rs = await rpc.post(
+        "addTorrent", "token:"+rpc.token, torrent, [],
+        {
+            "pause": pause ? "true" : "false",
+            "dir":"e:\\test"
+        }
+    );
+    var gid = rs.result;
+    rs = await rpc.getFiles(gid);
+    // stdout.println(gid,JSON.stringify(rs.result,"  "));
+    aaa(gid, rs.result);
+  } catch (err) {
+    stdout.println("err",err,JSON.stringify(err,"  "));
+  }
+}
 function PopupTrigger() {
   var popup;
   var anchorPoint = 1;
