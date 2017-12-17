@@ -1,15 +1,30 @@
 // include "common.tis";
 include "decorators.tis";
 include "jsonrpc.tis";
-var rpc;
+var rpc = new JsonRPC( "http://localhost:6800/jsonrpc" );
+var CT;
+// var template;
+var downloadList = {};
+var activeTask = {};
+function www(){
+    self.timer(1000,function(){
+        rpc.tellActive(["completedLength"], function(data){
+            stdout.println(JSON.stringify(data,"  "));
+        })
+        return true;
+    });
+}
 self.ready = function() {
-    rpc = new JsonRPC( "http://localhost:6800/jsonrpc" );
     // 加载或刷新deBug？
     $(#window-debug).on("click",function(){
         Sciter.launch( "inspector.exe" );
         view.connectToInspector($(html));
     });
-
+    CT = $(#downloading);
+    assert CT;
+    www();
+    // template = CT.first;
+    // CT.clear();
     // rpc.showSomething("d:\\Project\\GitHub\\aria2\\d.torrent");
 
     // stdout.println("4",JSON.stringify(rpc.showFiles("d:\\c.torrent"),"  "));
@@ -25,8 +40,62 @@ self.ready = function() {
         alignment: -5
     }; // -5 - in the middle of its parent window;
     stdout.printf("result:%v\n",v);
+    // stdout.println(rpc.getFiles(v.gid));
+    // startDownload(v.gid);
+    // rpc.tellStatus(v.gid, ["infoHash"]);
+    rpc.unpause(v.gid,function(){});
 }
-
+function addxxx(gid, status){
+    // var el = template.clone();
+    // stdout.println(el);
+    var contain = CT.$append(
+        <li gid="{gid}"><i .status></i>
+            <div .property>
+                <p .name>{status.bittorrent.info.name}</p>
+                <ul .status>
+                    <li><span .length>{status.totalLength}</span></li>
+                    <li><span .downloadSpeed>{status.downloadSpeed}</span></li>
+                    <li><span .completedLength>{status.completedLength}</span></li>
+                </ul>
+            </div>
+        </li>
+    );
+    downloadList[gid] = {
+        "status" : status.status,
+        "el" : contain,
+        "cl" : contain.$(.completedLength)
+    }
+    // stdout.println("li",li.@#gid);
+}
+// async function tellActive(){
+//   try {
+//     var rs = await rpc.tellActive();
+//     stdout.println("tellActive",JSON.stringify(rs.result,"  "));
+    
+//     // addxxx(gid, rs.result)
+//   } catch (err) {
+//     stdout.println("err",err,JSON.stringify(err,"  "));
+//   }
+// }
+// async function tellStatus(gid, keys){
+//   try {
+//     // stdout.println(gid,JSON.stringify(rs.result,"  "));
+//     var rs = await rpc.tellStatus(gid, keys);
+//     addxxx(gid, rs.result)
+//   } catch (err) {
+//     stdout.println("err",err,JSON.stringify(err,"  "));
+//   }
+// }
+async function startDownload(gid){
+  try {
+    // stdout.println(gid,JSON.stringify(rs.result,"  "));
+    var rs = await rpc.unpause(gid);
+    rs = await rpc.tellStatus(rs.result);
+    addxxx(gid, rs.result)
+  } catch (err) {
+    stdout.println("err",err,JSON.stringify(err,"  "));
+  }
+}
 /*
 864KiB/244MiB(0%) CN:25 SD:2 DL:119KiB ETA:34m49s
 http://aria2.github.io/manual/en/html/aria2c.html#misc
