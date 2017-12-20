@@ -1,6 +1,5 @@
 ﻿include "../../tis/decorators.tis";
 view.windowTopmost = true;
-const EOL = System.EOL;
 self.ready = function() {
     $(#window-caption).text = "粘贴地址或拖入Bt文件";
     $(#new-task-path).state.focus = false;

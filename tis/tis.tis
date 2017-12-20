@@ -40,8 +40,9 @@ self.ready = function() {
         alignment: -5
     }; // -5 - in the middle of its parent window;
     if (!urlist) return;
-    for(var v in urlist){
-        stdout.println(v);
+    for(var k in urlist){
+        // stdout.println(v);
+        
     }
     // stdout.printf("result:%v\n",v);
     return;
