@@ -5,12 +5,31 @@ self.ready = function() {
     $(#window-caption).text = "粘贴地址或拖入Bt文件";
     $(#new-task-path).state.focus = false;
 }
+function pushEx(arrayList, key, val){
+    if( !arrayList.exists( key ) )
+        arrayList[key] = new Array();
+    arrayList[key].push(val);
+}
 @click @on "#submit" :{
   var sourceList = $(#new-task-path).text.split("\n");
-  var arrayList = [];
+  var arrayList = {};
+  var ext = "";
+  var tag = "";
   for ( var v in sourceList ){
-    if(v = v.trim())
-      arrayList.push(v);
+    if(v = v.trim()){
+        ext = (v %~ ".").toLowerCase();
+        switch( ext ){
+            case "torrent":
+                tag = "torrent";
+            break
+            in ["jpg","png"]:
+                tag = "pic";
+            break
+            default:
+                continue;
+        }
+        pushEx(arrayList, tag, v);
+    }
   }
   view.close( arrayList );
 };
