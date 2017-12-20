@@ -22,7 +22,7 @@ self.ready = function() {
     });
     CT = $(#downloading);
     assert CT;
-    www();
+    // www();
     // template = CT.first;
     // CT.clear();
     // rpc.showSomething("d:\\Project\\GitHub\\aria2\\d.torrent");
@@ -33,17 +33,35 @@ self.ready = function() {
 }
 @click @on "#new-task":{
     // 新建任务
-    var v = view.dialog{
+    var urlist = view.dialog{
         url     : self.url("dialog/new-task/new-task.html"),
         client  : true,
         parameters  : "",
         alignment: -5
     }; // -5 - in the middle of its parent window;
-    stdout.printf("result:%v\n",v);
+    if (!urlist) return;
+    for(var v in urlist){
+        stdout.println(v);
+    }
+    // stdout.printf("result:%v\n",v);
+    return;
     // stdout.println(rpc.getFiles(v.gid));
     // startDownload(v.gid);
     // rpc.tellStatus(v.gid, ["infoHash"]);
-    rpc.unpause(v.gid,function(){});
+    rpc.unpause(v.gid,function(gid, data){
+        var contain = CT.$append(
+            <li gid="{gid}"><i .status></i>
+                <div .property>
+                    <p .name>{data.bittorrent.info.name}</p>
+                    <ul .status>
+                        <li><span .length>{data.totalLength}</span></li>
+                        <li><span .downloadSpeed>{data.downloadSpeed}</span></li>
+                        <li><span .completedLength>{data.completedLength}</span></li>
+                    </ul>
+                </div>
+            </li>
+        );
+    });
 }
 function addxxx(gid, status){
     // var el = template.clone();
@@ -86,16 +104,16 @@ function addxxx(gid, status){
 //     stdout.println("err",err,JSON.stringify(err,"  "));
 //   }
 // }
-async function startDownload(gid){
-  try {
-    // stdout.println(gid,JSON.stringify(rs.result,"  "));
-    var rs = await rpc.unpause(gid);
-    rs = await rpc.tellStatus(rs.result);
-    addxxx(gid, rs.result)
-  } catch (err) {
-    stdout.println("err",err,JSON.stringify(err,"  "));
-  }
-}
+// async function startDownload(gid){
+//   try {
+//     // stdout.println(gid,JSON.stringify(rs.result,"  "));
+//     var rs = await rpc.unpause(gid);
+//     rs = await rpc.tellStatus(rs.result);
+//     addxxx(gid, rs.result)
+//   } catch (err) {
+//     stdout.println("err",err,JSON.stringify(err,"  "));
+//   }
+// }
 /*
 864KiB/244MiB(0%) CN:25 SD:2 DL:119KiB ETA:34m49s
 http://aria2.github.io/manual/en/html/aria2c.html#misc

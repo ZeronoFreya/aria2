@@ -85,7 +85,7 @@ class JsonRPC // JSON RPC class using POST (application/json) requests
           "unpause",
           gid
       );
-      fn(rs.result);
+      fn(gid, rs.result);
     } catch (err) {
       stdout.println("err", err);
     }

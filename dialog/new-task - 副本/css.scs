@@ -1,0 +1,319 @@
+@import "../../scs/common.scs";
+html{
+    width: 310dip;
+    height: width(61.8%);
+    /*height: 600dip;*/
+}
+#body{
+    position: relative;
+    size: *;
+}
+.nt-input-group,
+.nt-cfg-group{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /*size: *;*/
+    flow:vertical;
+    padding: 5dip;
+    border-spacing: 10dip;
+    opacity: 1.0;
+    overflow: hidden;
+}
+.translate-up{
+    opacity: 0;
+    transform: translate(0, -100%);
+    transition: opacity(linear, 200ms) transform(cubic-out, 200ms) ;
+}
+.translate-dn{
+    opacity: 0;
+    transform: translate(0, 100%);
+    transition: opacity(linear, 200ms) transform(cubic-out, 200ms) ;
+}
+#new-task-path{
+    border-radius: 5dip;
+    border: 1px @BORDERCOLOR solid;
+    overflow: auto;
+    size: *;
+    color: @FONTCOLOR-DARK;
+    font-family: exo2;
+    font-size: 1em;
+    padding: 5dip;
+    word-wrap:break-word;
+    prototype: FileDropZone;
+}
+#new-task-path.active-target {
+    background:gold;
+}
+.nt-btn{
+    width: *;
+    height: 32px;
+    line-height: 32px;
+    background: transparent;
+    border: 1px @BORDERCOLOR solid;
+    border-radius: 5dip;
+    color: @FONTCOLOR-DARK;
+    font-family: exo2;
+    font-size: 12pt;
+}
+.tree-list{
+    size: *;
+}
+.tree-list nav{
+    width: *;
+    flow:horizontal;
+    border-spacing: 10dip;
+    /*padding: 5dip;*/
+    padding: 5dip 0;
+}
+.tree-list button{
+    /*width: max-content;*/
+    height: 1.6em;
+    line-height: 1.6em;
+    background: transparent;
+    border: 1px @BORDERCOLOR solid;
+    border-radius: 5dip;
+    color: @FONTCOLOR-DARK;
+    font-family: exo2;
+    font-size: 10pt;
+    padding: 0 0.6em;
+}
+#tree-list {
+    font-size: 12pt;
+    prototype: RsTree;
+    /*padding-left: 1.6em;*/
+    size: *;
+    min-height: 6em;
+    overflow-y: scroll-indicator;
+    overflow-x: hidden;
+}
+
+#tree-list option{
+    width: *;
+    overflow: hidden;
+    flow:vertical;
+    height: 1.8em;
+}
+
+#tree-list > option:expanded{
+    overflow-y: auto;
+}
+#tree-list option:expanded{
+    height:auto;
+}
+#tree-list option:collapsed{
+    height: 1.8em;
+}
+#tree-list caption{
+    width: *;
+    height: 1.8em;
+    flow:horizontal;
+    padding-right: 0.6em;
+}
+#tree-list caption:hover{
+    background-color: #ccc;
+}
+#tree-list .container i{
+    display: block;
+    height: 1.8em;
+    width: 1.4em;
+    cursor: pointer;
+    foreground-repeat: no-repeat;
+    foreground-position: 0.2em 50%;
+    foreground-size: 1.0em;
+    foreground-image: url(../../img/arrow_right.svg);
+    fill: #777;
+}
+#tree-list .container i:expanded{
+    foreground-image: url(../../img/arrow_down.svg);
+}
+#tree-list .content > caption{
+    padding-left: 2.4em;
+}
+#tree-list .content > option{
+    padding-left: 1.0em;
+}
+
+#tree-list text{
+    line-height:1.9em;
+    overflow-x:hidden;
+    white-space:nowrap;
+    text-overflow:path-ellipsis;
+}
+
+#tree-list checkbox { style-set: m-checkbox; }
+#tree-list caption > checkbox{
+    width: *;
+    padding-left: 1.8em;
+}
+
+@set m-checkbox {
+  :root {
+    behavior:check;
+    display:block;
+    height:1.9em;
+    foreground-repeat: no-repeat;
+    foreground-position: 0.2em 50%;
+    foreground-size: 1.0em;
+    foreground-image: url(../../img/check_0.svg);
+    fill: #777;
+    cursor:pointer;
+    transition: fill(linear, 80ms) foreground-image(linear, 80ms);
+  }
+
+  :root:checked {
+    foreground-image: url(../../img/check_1.svg);
+    /*fill: var(normal,#000);*/
+    /*transition: fill(linear, 80ms) foreground-image(linear, 80ms);*/
+  }
+  :root:checked:collapsed {
+    foreground-image: url(../../img/check_2.svg);
+    /*fill: var(normal,#000);*/
+    /*transition: fill(linear, 80ms) foreground-image(linear, 80ms);*/
+  }
+}
+#nt-savepath{
+    width: *;
+    overflow: hidden;
+    flow:vertical;
+}
+/*#nt-savepath .container{
+    prototype: PathInput;
+}*/
+#nt-savepath .container > group{
+    flow:horizontal;
+    height:1.5em;
+    border-spacing: 10dip;
+}
+#nt-savepath nav{
+    size: 1.5em;
+    /*flow:horizontal;
+    border-spacing: 10dip;
+    /*padding: 5dip;*/
+    /*padding: 5dip 0;*/
+    overflow: hidden;
+    foreground-repeat: no-repeat;
+    foreground-position: top right;
+    foreground-size: 0.3em;
+    foreground-image: url(../../img/more_arrow.svg);
+    fill:#000;
+    aspect: PopupTrigger;
+    /*behavior:clickable;*/
+}
+#nt-savepath nav i{
+    display: block;
+    size: *;
+    background:url(../../img/check_0.svg) no-repeat center center;
+    background-size: cover;
+}
+#nt-savepath button{
+    /*width: max-content;*/
+    height: 1.6em;
+    line-height: 1.6em;
+    background: transparent;
+    border: 1px @BORDERCOLOR solid;
+    border-radius: 5dip;
+    color: @FONTCOLOR-DARK;
+    font-family: exo2;
+    font-size: 10pt;
+    padding: 0 0.6em;
+}
+#nt-savepath .container{
+    width: *;
+    border: 1px @BORDERCOLOR solid;
+    border-radius: 5dip;
+    padding: 5dip;
+    height: 1.5em;
+    min-height: 1.5em;
+    flow:vertical;
+}
+#nt-savepath .container.custom-mode{
+    height:auto;
+    /*transition: height(linear, 200ms);*/
+}
+#nt-savepath .container .preview-download-path{
+    width: *;
+    height:1.5em;
+    line-height:1.5em;
+    overflow-x:hidden;
+    white-space:nowrap;
+    text-overflow:path-ellipsis;
+    cursor: text;
+    behavior:clickable;
+}
+#nt-savepath .container.custom-mode > group{
+/*    opacity: 0;
+    transform: translate(0, -100%);
+    transition: opacity(linear, 200ms) transform(cubic-out, 200ms) ;
+    z-index: 0;*/
+    opacity: 0;
+    height: 0;
+    /*transition: opacity(linear, 200ms) height(linear, 200ms);*/
+}
+#nt-savepath .container .custom-download-path{
+    opacity:0;
+    width: *;
+    max-height: 6.4em;
+    height: max-content;
+    line-height:1.5em;
+    overflow: auto;
+    background: transparent;
+    font-size: 12pt;
+    word-wrap:break-word;
+    /*transform: translate(0, 100%);*/
+    /*transition: opacity(linear, 200ms) transform(cubic-out, 200ms) ;*/
+}
+#nt-savepath .container.custom-mode .custom-download-path{
+    opacity: 1;
+    /*transform: translate(0, 0);*/
+}
+.preview-download-path popup[role=overflow-tooltip] {
+    background: gold;
+    border:1dip solid;
+    border-radius: 4dip;
+    padding:4dip;
+}
+
+#nt-btn{
+    flow:horizontal;
+    border-spacing: 10dip;
+}
+
+#nt-savepath nav popup
+{
+  background-color: #fff;
+  border: 1px @BORDERCOLOR solid;
+  border-radius: 5dip;
+  width:100dip;
+  height:auto;
+  flow:vertical;
+  border-spacing: 5dip;
+  padding: 5dip;
+}
+#nt-savepath nav popup li{
+    height: 1.6em;
+    line-height: 1.6em;
+    width: *;
+    /*border: 1px @BORDERCOLOR solid;*/
+    /*border-radius: 5dip;*/
+    color: @FONTCOLOR-DARK;
+    font-family: exo2;
+    font-size: 10pt;
+    padding: 0 0.6em;
+    /*background-color: transparent;*/
+    background-repeat: no-repeat;
+    background-position: center left;
+    background-size: contain;
+    background-image:url(../../img/check_0.svg);
+    text-indent: 1.8em;
+    /*padding-left: 2em;*/
+    cursor: pointer;
+}
+#nt-savepath nav popup li:last-child{
+background-image:url(../../img/picture.svg);
+}
+#nt-savepath nav popup li:hover{
+    background-color:#ccc;
+}
