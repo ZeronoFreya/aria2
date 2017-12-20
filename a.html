@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+    form.window
+    {
+    prototype: Widget;
+    height:110dip;
+    width:110dip;
+    padding:4px;
+    border:1px red solid;
+    }
+    form.window > caption
+    {
+    width:*;
+    line-height:1.4em;
+    padding:4px 10px;
+    cursor:move;
+    background: gold;
+    }
+    </style>
+    <script type="text/tiscript">
+class Widget: Behavior
+{
+function attached()
+  {
+    this.xoff = 0;
+    this.yoff = 0;
+    this.dragging = false;
+  }
+function onMouse(evt)
+  {
+    var cap = this.select("caption");
+    switch(evt.type) 
+    {
+      case Event.MOUSE_DOWN:
+        if( evt.target === cap)
+        {
+          this.xoff = evt.x; 
+          this.yoff = evt.y;
+          this.dragging = true;
+          cap.capture(true);
+          view.doEvent(#untilMouseUp);
+          return true;
+        }
+        break;
+      case Event.MOUSE_UP:
+        if(this.dragging)
+        {
+          this.dragging = false;
+          cap.capture(false);
+          return true;
+        }
+        break;
+      case Event.MOUSE_MOVE:
+        if( this.dragging )
+        {
+          this.move( evt.xView - this.xoff, evt.yView - this.yoff, #view, #detached-window);
+          return true;
+        }
+        break;
+    }
+  }
+}
+    </script>
+</head>
+<body>
+<form.window>
+  <caption>Window #1</caption>
+</form>
+<form.window>
+  <caption>Window #1</caption>
+</form>
+</body>
+</html>
