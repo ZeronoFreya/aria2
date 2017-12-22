@@ -15,7 +15,18 @@
         <button >设置</button>
         <button >完成关机</button>
     </group>
-    <ul #downloading></ul>
+    <ul #downloading>
+        <li gid="{gid}"><i .status></i>
+            <div .property>
+                <p .name></p>
+                <ul .status>
+                    <li><span .length>{data.totalLength}</span></li>
+                    <li><span .downloadSpeed>{data.downloadSpeed}</span></li>
+                    <li><span .completedLength>{data.completedLength}</span></li>
+                </ul>
+            </div>
+        </li>
+    </ul>
 </section>
 <include src="statusbar.html" />
 </widget>

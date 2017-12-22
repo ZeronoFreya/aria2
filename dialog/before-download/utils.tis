@@ -1,0 +1,116 @@
+class FileDropZone : Element
+{
+  event dragenter (evt)
+  {
+    if(evt.draggingDataType == #file)
+    {
+      attributes.addClass("active-target");
+      return true;
+    }
+  }
+
+  event dragleave (evt)
+  {
+    attributes.removeClass("active-target");
+    return true;
+  }
+
+  event drag (evt)
+  {
+    if(evt.draggingDataType == #file)
+    {
+      // stdout.println(evt.x,evt.y);
+      return true;
+    }
+  }
+
+  event drop (evt)
+  {
+    if(evt.draggingDataType == #file)
+    {
+      attributes.removeClass("active-target");
+      var fn = evt.dragging.substr(7);
+      text = fn;
+      // view.msgbox(#information, String.printf("Dropped:%V",fn));
+      return true;
+    }
+  }
+
+}
+
+
+function sortJsonKey( data ){
+  var a = [];
+  for(var k in data)
+      a.push( k );
+  return a.sort();
+}
+function creatTree( data ){
+    var _f = {};
+    var html = "";
+    if( data.exists("_f") ){
+        _f = data["_f"].clone();
+        data.remove("_f");
+    }
+    var kSort = sortJsonKey( data );
+    for( var k in kSort ){
+        html += "<option><caption.container><i></i><checkbox><text>" + k + "</text></checkbox></caption><section.content>";
+        creatTree(data[k]);
+        html += "</section></option>";
+    }
+    kSort = sortJsonKey( _f );
+    for( var k in kSort){
+        html += "<caption><checkbox.ck><text>" + k + "</text></checkbox></caption>";
+    }
+    return html;
+}
+function creatDataJson(root, rs){
+    var data = {"_f":{}};
+    var _data = data;
+    var pathSplit = [];
+    var lastOfPathSplit = "";
+    for(var v in rs){
+        pathSplit = v.path.replace(root,"").split("/");
+        lastOfPathSplit = pathSplit.pop();
+        for( var i in pathSplit )
+            _data = _data[i] ? _data[i] : _data[i] = {"_f":{}};
+        _data["_f"][lastOfPathSplit] = { "index": v.index, "length": v.length, "selected": v.selected };
+        _data = data;
+    }
+    return data;
+}
+
+// function PopupTrigger() {
+//   var popup;
+//   var anchorPoint = 1;
+//   var popupPoint = 1;
+//   // if( var popupSelector = attributes["popup"] )
+//   //   popup = self.select(popupSelector);
+//   // if( !popup )
+//     popup = select("popup");
+
+//   assert popup : "PopupTrigger: popup not found";
+
+//   var popupShown = false;
+//   var me = this;
+//   var target, path;
+//   this << event click (evt) {
+//     target = evt.target;
+//     if( !target.belongsTo(this,false,true) )
+//       return false;
+//     if(popupShown){
+//         if (path = target.@#data-path) {
+//             $(#preview-download-path).text = path;
+//             // view.msgbox( #information, target.style#background-image.substr(7));
+//             $(i).style#background-image = "url("+target.style#background-image.substr(7)+")";
+//         }
+//       popup.state.popup = false;
+//     }
+//     else
+//       popup(popup, (popupPoint << 16) | anchorPoint );
+//   }
+
+//   popup << event popupready { popupShown = true; }
+//         << event popupdismissed { me.timer(500ms, ::popupShown = false); };
+
+// }

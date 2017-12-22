@@ -1,0 +1,45 @@
+﻿<html window-frame="transparent">
+<head>
+<title>new-task</title>
+<style type="text/css" src="css.scs"></style>
+<script type="text/tiscript" src="tis.tis"></script>
+</head>
+<body>
+<widget#widget>
+<include src="titlebar.html" />
+<section#body>
+    <section #nt-cfg-group .nt-cfg-group .translate-dn>
+        <group .tree-list>
+            <nav>
+                <button>Expand All</button>
+                <button>MP4</button>
+            </nav>
+            <widget#tree-list></widget>
+        </group>
+        <group #nt-savepath>
+            <widget .container>
+                <group>
+                    <nav#select-save-path>
+                        <i></i>
+                        <popup>
+                            <li data-path="e:/download/">默认</li>
+                            <li data-path="e:/download/pic/">图片</li>
+                        </popup>
+                    </nav>
+                    <text #preview-download-path .preview-download-path>https://sciter.com/forums/topic/path-ellipsis/#post-51193</text>
+                </group>
+                <textarea #custom-download-path .custom-download-path></textarea>
+            </widget>
+        </group>
+        <group #nt-btn>
+            <button .nt-btn #close-dialog0>稍后下载</button>
+            <button .nt-btn #close-dialog>立即下载</button>
+        </group>
+    </section>
+</section>
+<include src="statusbar.html" />
+</widget>
+</body>
+
+</html>
+

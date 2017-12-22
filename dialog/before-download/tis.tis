@@ -1,0 +1,55 @@
+﻿include "../../tis/decorators.tis";
+include "utils.tis";
+view.windowTopmost = true;
+var _gid = 0;
+var rpc = view.parameters.rpc;
+function addTorrent(file){
+  // stdout.println("file",file);
+    rpc.addTorrent( file, function(gid, list){
+        _gid = gid;
+        stdout.println("list",JSON.stringify(list,"  "));
+        var data = creatDataJson("d:/aria/", list);
+        stdout.println("data",JSON.stringify(data,"  "));
+        var html = creatTree( data );
+        $(widget#tree-list).clear().append(html);
+    });
+}
+self.ready = function() {
+    // $(#window-caption).text = "粘贴地址或拖入Bt文件";
+    // $(#new-task-path).state.focus = false;
+    switch( view.parameters.tp ){
+      case "torrent":
+        addTorrent( view.parameters.data );
+      break;
+
+    }
+}
+@click @on "#close-dialog" :{
+
+  // rpc.unpause(_gid,function(gid){
+  //   rpc.tellStatus(gid,["bittorrent",
+  //     "totalLength",
+  //     "downloadSpeed",
+  //     "completedLength"],
+  //     function(gid, data){
+  //       // stdout.println(JSON.stringify(data,"  "));
+  //       view.parameters.start(gid, data);
+  //       view.close();
+  //   })
+  // });
+  rpc.changeOption(_gid,function(state){
+    stdout.println("state",state);
+    if(state != "OK") return;
+    rpc.unpause(_gid,function(gid){
+      rpc.tellStatus(gid,["bittorrent",
+        "totalLength",
+        "downloadSpeed",
+        "completedLength"],
+        function(gid, data){
+          // stdout.println(JSON.stringify(data,"  "));
+          view.parameters.start(gid, data);
+          view.close();
+      })
+    });
+  })
+};

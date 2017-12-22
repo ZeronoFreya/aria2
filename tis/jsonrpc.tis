@@ -18,7 +18,7 @@ class JsonRPC // JSON RPC class using POST (application/json) requests
   function post( methodName, argv.. ){
     var aria2rpc = {}.extend(this.aria2rpc, {
       "method": "aria2." + methodName.toString(),
-      "params": [].concat(aria2rpc.params, argv)
+      "params": [].concat(this.aria2rpc.params, argv)
     });
     return this.indicator.request(#post-json, this.url , aria2rpc);
   }
@@ -30,7 +30,7 @@ class JsonRPC // JSON RPC class using POST (application/json) requests
           torrent, [],
           {
               "pause": "true",
-              "dir":"r:\\"
+              "dir":"d:\\aria"
           }
       );
       var gid = rs.result;
@@ -41,7 +41,7 @@ class JsonRPC // JSON RPC class using POST (application/json) requests
       // stdout.println(gid,JSON.stringify(rs.result,"  "));
       fn(gid, rs.result);
     } catch (err) {
-      stdout.println("err",err);
+      stdout.println("err0",err);
     }
   }
   async function tellStatus(gid, keys, fn){
@@ -52,15 +52,15 @@ class JsonRPC // JSON RPC class using POST (application/json) requests
       );
       fn(gid, rs.result);
     } catch (err) {
-      stdout.println("err", err);
+      stdout.println("err1", err);
     }
   }
   /*
-   查询所有激活的任务
-   https://aria2.github.io/manual/en/html/aria2c.html#aria2.tellActive
-   return [{
-      同 tellStatus
-   }]
+   * 查询所有激活的任务
+   * https://aria2.github.io/manual/en/html/aria2c.html#aria2.tellActive
+   * return [{
+   *    同 tellStatus
+   * }]
   */
   async function tellActive(keys, fn){
     try {
@@ -68,9 +68,10 @@ class JsonRPC // JSON RPC class using POST (application/json) requests
           "tellActive",
           keys
       );
-      fn(rs.result);
+      fn(true, rs.result);
     } catch (err) {
-      stdout.println("err", err);
+      // stdout.println("err", err);
+      fn(false, err);
     }
   }
   /*
@@ -85,9 +86,23 @@ class JsonRPC // JSON RPC class using POST (application/json) requests
           "unpause",
           gid
       );
-      fn(gid, rs.result);
+      fn(rs.result);
     } catch (err) {
-      stdout.println("err", err);
+      stdout.println("err2", err);
+    }
+  }
+  async function changeOption(gid, fn){
+    try {
+      var rs = await this.post(
+          "changeOption",
+          gid,
+          {
+            "dir":"d:/aria2/"
+          }
+      );
+      fn(rs.result);
+    } catch (err) {
+      stdout.println("err3", err);
     }
   }
 

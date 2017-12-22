@@ -3,25 +3,47 @@ include "decorators.tis";
 include "jsonrpc.tis";
 var rpc = new JsonRPC( "http://localhost:6800/jsonrpc" );
 var CT;
-// var template;
+var template;
+var liTemp;
 var downloadList = {};
 var activeTask = {};
+var isLoop = true;
 function www(){
-    self.timer(1000,function(){
-        rpc.tellActive(["completedLength"], function(data){
-            stdout.println(JSON.stringify(data,"  "));
+    if(!isLoop) return;
+    CT.timer(1000,function(){
+        rpc.tellActive([
+        "completedLength",
+        "downloadSpeed",
+        "gid"], function(state, data){
+            if(!state){
+                isLoop = false;
+                return false;
+            }
+            isLoop = data.length == 0 ? false : true;
+            var li;
+            for(var v in data){
+                if(!(li = CT.$( li[gid="{v.gid}"] ))){
+                    li = start(v.gid, v);
+                }
+                li.$(span.downloadSpeed).text = v.downloadSpeed;
+                li.$(span.completedLength).text = v.completedLength;
+            }
         })
-        return true;
+        stdout.println("isLoop0",isLoop);
+        return isLoop;
     });
 }
 self.ready = function() {
     // 加载或刷新deBug？
-    $(#window-debug).on("click",function(){
-        Sciter.launch( "inspector.exe" );
-        view.connectToInspector($(html));
-    });
+    // $(#window-debug).on("click",function(){
+    //     Sciter.launch( "inspector.exe" );
+    //     view.connectToInspector($(html));
+    // });
+    stdout.println("1");
     CT = $(#downloading);
+    stdout.println("2");
     assert CT;
+    stdout.println("3");
     // www();
     // template = CT.first;
     // CT.clear();
@@ -29,40 +51,80 @@ self.ready = function() {
 
     // stdout.println("4",JSON.stringify(rpc.showFiles("d:\\c.torrent"),"  "));
     // System.exec("d:\\SoftWare\\WebSW\\aria2\\aria2c.exe", "--enable-rpc", "--rpc-listen-port=6800");
-
+    // template = $(.subwindow);
+    // template.detach();
+    liTemp = CT.first;
+    // CT.clear();
+    liTemp.detach();
+    stdout.println("w");
 }
+function start(gid, data){
+    stdout.println("ddddd");
+    var li = liTemp.clone();
+    li.@#gid = gid;
+    CT.append(li);
+    li.$(p.name).text = data.bittorrent.info.name;
+    li.$(span.length).text = data.totalLength;
+    li.$(span.downloadSpeed).text = data.downloadSpeed;
+    li.$(span.completedLength).text = data.completedLength;
+    www();
+    return li;
+}
+function viewWindow(tp, file) {
+    stdout.println("viewWindow");
+    view.window{
+        url     : self.url("dialog/before-download/before-download.html"),
+        client  : true,
+        parameters  : {
+            rpc : rpc,
+            tp: tp,
+            data: file,
+            start: start
+        },
+        alignment: -5
+    }
+}
+// $(#new-task)
 @click @on "#new-task":{
     // 新建任务
-    var urlist = view.dialog{
-        url     : self.url("dialog/new-task/new-task.html"),
-        client  : true,
-        parameters  : "",
-        alignment: -5
-    }; // -5 - in the middle of its parent window;
+    stdout.println("#new-task");
+    // var urlist = view.dialog{
+    //     url     : self.url("dialog/new-task/new-task.html"),
+    //     client  : true,
+    //     alignment: -5
+    // }; // -5 - in the middle of its parent window;
+    var urlist = {
+        torrent:["d:/project/GitHub/aria2/d.torrent"]
+    }
     if (!urlist) return;
     for(var k in urlist){
-        // stdout.println(v);
-        
+        if (k == "torrent") {
+            for(var v in urlist[k]){
+                viewWindow(k,v);
+            }
+            continue;
+        }
+        viewWindow(k,urlist[k]);
     }
     // stdout.printf("result:%v\n",v);
     return;
     // stdout.println(rpc.getFiles(v.gid));
     // startDownload(v.gid);
     // rpc.tellStatus(v.gid, ["infoHash"]);
-    rpc.unpause(v.gid,function(gid, data){
-        var contain = CT.$append(
-            <li gid="{gid}"><i .status></i>
-                <div .property>
-                    <p .name>{data.bittorrent.info.name}</p>
-                    <ul .status>
-                        <li><span .length>{data.totalLength}</span></li>
-                        <li><span .downloadSpeed>{data.downloadSpeed}</span></li>
-                        <li><span .completedLength>{data.completedLength}</span></li>
-                    </ul>
-                </div>
-            </li>
-        );
-    });
+    // rpc.unpause(v.gid,function(gid, data){
+    //     var contain = CT.$append(
+    //         <li gid="{gid}"><i .status></i>
+    //             <div .property>
+    //                 <p .name>{data.bittorrent.info.name}</p>
+    //                 <ul .status>
+    //                     <li><span .length>{data.totalLength}</span></li>
+    //                     <li><span .downloadSpeed>{data.downloadSpeed}</span></li>
+    //                     <li><span .completedLength>{data.completedLength}</span></li>
+    //                 </ul>
+    //             </div>
+    //         </li>
+    //     );
+    // });
 }
 function addxxx(gid, status){
     // var el = template.clone();
