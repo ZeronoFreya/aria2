@@ -1,0 +1,60 @@
+*** BitTorrent File Information ***
+
+Comment: NyaaV2 Torrent #2368986
+
+Creation Date: Fri, 13 Oct 2017 23:30:23 GMT
+
+Created By: NyaaV2
+
+Mode: multi
+
+Announce:
+
+ http://sukebei.tracker.wf:8888/announce
+
+ udp://open.stealth.si:80/announce
+
+ udp://tracker.opentrackr.org:1337/announce
+
+ udp://tracker.coppersurfer.tk:6969/announce
+
+ udp://tracker.leechers-paradise.org:6969/announce
+
+Info Hash: 8dc643f4fc9d438a3b58f9cac18f0e00cdc12e07
+
+Piece Length: 4.0MiB
+
+The Number of Pieces: 4088
+
+Total Length: 15GiB (17,144,238,231)
+
+Name: [魔穗字幕组]9月作品合集(Standard Edition)
+
+Magnet URI: magnet:?xt=urn:btih:8DC643F4FC9D438A3B58F9CAC18F0E00CDC12E07&dn=%5B%E9%AD%94%E7%A9%97%E5%AD%97%E5%B9%95%E7%BB%84%5D9%E6%9C%88%E4%BD%9C%E5%93%81%E5%90%88%E9%9B%86%28Standard%20Edition%29&tr=http%3A%2F%2Fsukebei.tracker.wf%3A8888%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce
+
+Files:
+
+idx|path/length
+
+===+===========================================================================
+
+  1|./[魔穗字幕组]9月作品合集(Standard Edition)/ASS SUB/[BOOTLEG]僕だけのヘンタイカノジョ もっと THE ANIMATION.ass
+
+   |15KiB (15,758)
+
+---+---------------------------------------------------------------------------
+
+  2|./[魔穗字幕组]9月作品合集(Standard Edition)/ASS SUB/[EDGE]ヒトヅマライフ ワンタイムギャル 前編.ass
+
+   |19KiB (19,939)
+
+---+---------------------------------------------------------------------------
+
+  3|./[魔穗字幕组]9月作品合集(Standard Edition)/ASS SUB/[EDGE]レジデンス 中巻 思考の褒美.ass
+
+   |18KiB (18,785)
+
+---+---------------------------------------------------------------------------
+
+>>> Printing the contents of file 'd:/project/GitHub/aria2/mh.torrent'...
+
