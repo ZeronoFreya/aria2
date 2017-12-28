@@ -2,9 +2,11 @@
 
 class JsonRPC // JSON RPC class using POST (application/json) requests
 {
+  var _this;
   function this( url , indicatorElement = self )
      //indicatorElement - DOM element to send requests through
   {
+    _this = this;
     this.indicator = indicatorElement;
     this.url = url;
     this.token = "aria2-sciter";
@@ -42,6 +44,53 @@ class JsonRPC // JSON RPC class using POST (application/json) requests
       fn(gid, rs.result);
     } catch (err) {
       stdout.println("err0",err);
+    }
+  }
+  async function addMagnet (magnet, fn){
+    try {
+      var rs = await this.post(
+          "addUri",
+          [magnet],
+          {
+              // "pause": "true",
+              // "pause-metadata": "true",
+              "dir":"temp",
+              "bt-metadata-only":"true",
+              // "bt-save-metadata":"true"
+          }
+      );
+      var gid = rs.result;
+      this.indicator.timer(500,function(){
+        rs = await _this.post(
+            "tellStatus",
+            gid,["status","infoHash"]
+        );
+        switch(rs.result.status){
+          case "active":
+            stdout.println("active");
+          break;
+          case "waiting":
+            stdout.println("waiting");
+          break;
+          case "paused":
+            stdout.println("paused");
+          break;
+          case "error":
+            stdout.println("error");
+          break;
+          case "complete":
+            stdout.println("complete");
+            return false;
+          break;
+          case "removed":
+            stdout.println("removed");
+          break;
+        }
+        return true;
+      })
+      fn(gid, rs.result);
+    } catch (err) {
+      stdout.println("addMagnet", err);
     }
   }
   async function tellStatus(gid, keys, fn){
